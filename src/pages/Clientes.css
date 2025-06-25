@@ -10,7 +10,7 @@ th{
   margin-left: -70px;
   width: 90%;
   max-width:1400px;
-  min-width:1400px;
+  min-width:320px;
   border-collapse: separate;
   border-spacing: 0;
   background: #fff;
@@ -19,8 +19,8 @@ th{
   overflow: hidden;
 }
 #input-search {
-   display: block;
-  margin: 32px auto 0 auto;    
+  display: block;
+  margin: 32px auto 24px auto;    
   width: 90%;
   max-width: 400px;
   min-width: 200px;
@@ -32,4 +32,11 @@ th{
   box-shadow: 0 2px 8px rgba(39,60,117,0.06);
   outline: none;
   transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.clientes-container {
+  width: 100%;
+  max-width: 1400px;
+  margin-top: 250px;
+  padding: 0 16px;
 }

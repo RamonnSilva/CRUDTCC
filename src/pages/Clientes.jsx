@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import './Clientes.css';
+import Total from './Total'
 const Clientes = () => {
 
   const [busca, setBusca] = useState('');
@@ -91,6 +92,8 @@ const handleCloseModal = () => {
 };
   return (
     <>
+    <div className='clientes-container'>
+      <Total/>
     <input 
         type="search"
         placeholder="Pesquisar cliente"
@@ -148,6 +151,7 @@ const handleCloseModal = () => {
 
 
     </Table>
+    </div>
       <Modal show={showModal} onHide={handleCloseModal}>
       <Modal.Header closeButton>
         <Modal.Title>Editar Cliente</Modal.Title>

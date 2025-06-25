@@ -9,7 +9,7 @@ import "./Doacoes.css"
 const Doacoes = () => {
 
   const [busca, setBusca] = useState('');
-  const [doacoes, setDoacao] = useState([]);
+  const [doacoes, setDoacoes] = useState([]);
   const [showModal, setShowModal] = useState(false); 
   const [editDoacaoId, setEditDoacaoId] = useState(null); 
   const [editedDoacao, setEditedDoacao] = useState({
@@ -23,7 +23,7 @@ const Doacoes = () => {
     DoacaoService.getAllDoacoes()
       .then(response => {
         const doacoes = response.data;
-        setDoacao(doacoes);
+        setDoacoes(doacoes);
         console.log(doacoes);
       })
       .catch(error => {
@@ -57,9 +57,9 @@ const handleEdit = (doacao) => {
 const handleUpdate = () => {
   if (!editDoacaoId) return;
 
-  DoacaoService.updateDoacao(editDoacaoId, editedDoacao)
+  DoacaoService.updateDoacoes(editDoacaoId, editedDoacao)
     .then(() => {
-      setDoacao(prevDoacoes =>
+      setDoacoes(prevDoacoes =>
         prevDoacoes.map(doacao =>
           doacao.id === editDoacaoId ? { ...doacao, ...editedDoacao } : doacao
         )

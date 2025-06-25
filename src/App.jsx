@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import './App.css';
 import Home from './pages/Home';
 import Clientes from './pages/Clientes';
-import Sobre from './pages/Sobre';
+import Adicionar from './pages/Adicionar';
 import Doacoes from './pages/Doacao';
 import Login from './pages/Login';
+import AdicionarDoacao from './pages/AdicionarDoacao';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { Button, Offcanvas } from 'react-bootstrap'; // ✅ Importações corrigidas
@@ -27,8 +28,9 @@ function App() {
       <nav>
                <ul>
                   <li><Link to="/clientes">Clientes</Link></li>
-                  <li><Link to="/sobre">Sobre</Link></li>
+                  <li><Link to="/adicionar">Adicionar Cliente</Link></li>
                   <li><Link to="/doacao">Doação</Link></li>
+                  <li><Link to="/adicionardoacao">Adicionar Doacao</Link></li>
               </ul>
               </nav>
          </header>
@@ -37,7 +39,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/clientes' element={<Clientes />} />
           <Route path='/doacao' element={<Doacoes />} />
-          <Route path='/sobre' element={<Sobre />} />
+          <Route path='/adicionar' element={<Adicionar />} />
+          <Route path='/adicionardoacao' element={<AdicionarDoacao />} />
         </Routes>
       </>
     </BrowserRouter>

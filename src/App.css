@@ -63,7 +63,7 @@ h1{
 }
 
 body{
-  overflow: scroll;
+  overflow: hidden;
 }
 .container{
   background-color:#888;

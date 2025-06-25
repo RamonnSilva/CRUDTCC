@@ -28,6 +28,7 @@ const multipartInstance = axios.create({
 const httpCommom = {
   mainInstance,
   multipartInstance,
+  doacaoInstance
 };
 
 export default httpCommom;

@@ -2,22 +2,22 @@ import http from './http-common';
 const DOACAO_URL = "http://localhost:8080";
 
 const getAllDoacoes = () => {
-    return http.mainInstance.get(DOACAO_URL + '/doacao');
+    return http.doacaoInstance.get(DOACAO_URL + '/doacao');
 };
 
 
 const deleteDoacoes = (id) => {
-    return http.mainInstance.delete(`${DOACAO_URL}/doacao/${id}`);
+    return http.doacaoInstance.delete(`${DOACAO_URL}/doacao/${id}`);
 };
 
 const updateDoacoes = (id, data) => {
-    return http.mainInstance.put(`${DOACAO_URL}/doacao/${id}`, data);
+    return http.doacaoInstance.put(`${DOACAO_URL}/doacao/${id}`, data);
 };
 
-const ClienteService = {
+const DoacaoService = {
     getAllDoacoes,
     deleteDoacoes,
     updateDoacoes,
 }
 
-export default ClienteService;
+export default DoacaoService;
