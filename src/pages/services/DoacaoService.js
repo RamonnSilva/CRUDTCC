@@ -14,6 +14,10 @@ const updateDoacoes = (id, data) => {
     return http.doacaoInstance.put(`${DOACAO_URL}/doacao/${id}`, data);
 };
 
+
+
+
+
 const DoacaoService = {
     getAllDoacoes,
     deleteDoacoes,

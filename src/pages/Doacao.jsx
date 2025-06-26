@@ -105,6 +105,7 @@ const handleCloseModal = () => {
       <thead>
         <tr>
           <th>id</th>
+          <th>Imagem</th>
           <th>Nome</th>
           <th>Titulo</th>
           <th>Genero</th>
@@ -126,6 +127,13 @@ const handleCloseModal = () => {
         .map(doacao => (
           <tr key={doacao.id}>
             <td>{doacao.id}</td>
+            <td>{doacao.imagem ?(
+              <img src={`http://localhost:8080/doacao/${doacao.id}/imagem`} alt="Imagem da Doacao" className="img-thumbnail" style={{width:'60px', height:'60px'}}/>
+            ) : (
+              <span>Sem imagem</span> 
+            )
+            
+          }</td>
             <td>{doacao.nome}</td>
             <td>{doacao.titulo}</td>
             <td>{doacao.genero}</td>
@@ -192,7 +200,7 @@ const handleCloseModal = () => {
             <Form.Label>Autor</Form.Label>
             <Form.Control
               type="text"
-              name="Autor"
+              name="autor"
               value={editedDoacao.autor}
               onChange={handleChange}
               placeholder="Digite o autor"
