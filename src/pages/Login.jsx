@@ -5,11 +5,26 @@ import './Login.css';
 function Login({ aoEntrar }) {
     const { register, handleSubmit } = useForm();
 
-    function onSubmit(userData) {
-        console.log(userData);
-        aoEntrar();
-    }
+   async function onSubmit(userData) {
+    try {
+    const response = await fetch('http://localhost:8080/auth/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+    });
+        if (!response.ok) {
+            throw new Error('Erro ao fazer login')
+        }
+        const data = await response.json();
+        localStorage.setItem('token', data.token);
 
+        aoEntrar();
+    } catch(error) {
+        alert('erro ao fazer login: ' + error.message);
+    }
+   }
     return (
         <div className="login-background">
             <div className="login-container">
@@ -30,7 +45,7 @@ function Login({ aoEntrar }) {
                         <input
                             type="password"
                             placeholder="Digite sua senha"
-                            {...register("password")}
+                            {...register("senha")}
                             required
                         />
                     </label>

@@ -33,6 +33,8 @@ const Adicionar = () => {
                 senha: '',
                 cep: '',
                 telefone: '',
+                endereco: '',
+                estado: '',
             }}
             onSubmit={(values, actions) => {
 
@@ -44,6 +46,8 @@ const Adicionar = () => {
                             senha: values.senha,
                             cep: values.cep,
                             telefone: values.telefone,
+                            endereco: values.endereco,
+                            estado: values.estado,
                         })
                         setClicou(true)
                         // alert(JSON.stringify(values, null, 2));
@@ -121,7 +125,40 @@ const Adicionar = () => {
                         />
                         {props.errors.preco && <div id="feedback">{props.errors.preco}</div>}
                     </div>
-                   
+                       <div>
+                        <input
+                            type="text"
+                            onChange={props.handleChange}
+                            onBlur={props.handleBlur}
+                            value={props.values.nome}
+                            placeholder="Nome"
+                            name="nome"
+                        />
+                        {props.errors.nome && <div id="feedback">{props.errors.nome}</div>}
+                    </div>
+                        <div>
+                        <input
+                            type="text"
+                            onChange={props.handleChange}
+                            onBlur={props.handleBlur}
+                            value={props.values.endereco}
+                            placeholder="Endereco"
+                            name="endereco"
+                        />
+                        {props.errors.endereco && <div id="feedback">{props.errors.endereco}</div>}
+                    </div>
+                    <div>
+                        <input
+                            type="text"
+                            onChange={props.handleChange}
+                            onBlur={props.handleBlur}
+                            value={props.values.estado}
+                            name="estado"
+                            placeholder="Estado"
+                            maxLength={2}
+                        />
+                        {props.errors.estado && <div id="feedback">{props.errors.endereco}</div>}
+                        </div>
                  <button type="submit" >ADICIONAR</button>
                     
                 </form>

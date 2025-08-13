@@ -18,6 +18,8 @@ const Clientes = () => {
     senha: '',
     cep: '',
     telefone: '',
+    endereco: '',
+    estado: '',
   }); 
   useEffect(() => {
     ClienteService.getAllClientes()
@@ -50,6 +52,8 @@ const handleEdit = (cliente) => {
     senha: cliente.senha,
     cep: cliente.cep,
     telefone: cliente.telefone,
+    endereco: cliente.endereco,
+    estado: cliente.estado,
   });
   setShowModal(true);
 };
@@ -88,6 +92,8 @@ const handleCloseModal = () => {
     senha: '',
     cep: '',
     telefone: '',
+    endereco: '',
+    estado: '',
   });
 };
   return (
@@ -112,6 +118,8 @@ const handleCloseModal = () => {
           <th>Senha</th>
           <th>Cep</th>
           <th>Telefone</th>
+          <th>Endereco</th>
+          <th>Estado</th>
           <th>STATUS</th>
         </tr>
       </thead>
@@ -121,7 +129,9 @@ const handleCloseModal = () => {
            cliente.nome.toLowerCase().includes(busca.toLowerCase()) ||
             cliente.email.toLowerCase().includes(busca.toLowerCase()) ||
             cliente.cep.toLowerCase().includes(busca.toLowerCase()) ||
-            cliente.telefone.toLowerCase().includes(busca.toLowerCase())
+            cliente.telefone.toLowerCase().includes(busca.toLowerCase()) ||
+            cliente.endereco.toLowerCase().includes(busca.toLowerCase()) ||
+            cliente.estado.toLowerCase().includes(busca.toLowerCase())
         )
         
         
@@ -133,6 +143,8 @@ const handleCloseModal = () => {
             <td>{cliente.senha}</td>
             <td>{cliente.cep}</td>
             <td>{cliente.telefone}</td>
+            <td>{cliente.endereco}</td>
+            <td>{cliente.estado}</td>
             <td>
             <Button variant="outline-success" onClick={() => handleEdit(cliente)}>
                   Editar
@@ -210,6 +222,26 @@ const handleCloseModal = () => {
               value={editedCliente.telefone}
               onChange={handleChange}
               placeholder="Digite o telefone"
+            />
+            </Form.Group>
+             <Form.Group controlId="formEndereco">
+            <Form.Label>Endereco</Form.Label>
+            <Form.Control
+              type="text"
+              name="endereco"
+              value={editedCliente.endereco}
+              onChange={handleChange}
+              placeholder="Digite o endereco"
+            />
+           </Form.Group>
+             <Form.Group controlId="formEstado">
+            <Form.Label>Estado</Form.Label>
+            <Form.Control
+              type="text"
+              name="estado"
+              value={editedCliente.estado}
+              onChange={handleChange}
+              placeholder="Digite o estado"
             />
           </Form.Group>
         </Form>
