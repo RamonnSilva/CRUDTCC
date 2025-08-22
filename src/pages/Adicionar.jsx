@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
-import './Adicionar.css'
+import './styles/Adicionar.css'
 import { Link } from 'react-router-dom';
 
 
@@ -71,7 +71,7 @@ const Adicionar = () => {
                             onChange={props.handleChange}
                             onBlur={props.handleBlur}
                             value={props.values.nome}
-                            placeholder="Nome"
+                            placeholder="nome"
                             name="nome"
                         />
                         {props.errors.nome && <div id="feedback">{props.errors.nome}</div>}
@@ -96,7 +96,7 @@ const Adicionar = () => {
                             onBlur={props.handleBlur}
                             value={props.values.senha}
                             name="senha"
-                            placeholder="password"
+                            placeholder="senha"
                             maxLength={30}
                         />
                         {props.errors.codigoBarras && <div id="feedback">{props.errors.codigoBarras}</div>}
@@ -108,7 +108,7 @@ const Adicionar = () => {
                             onBlur={props.handleBlur}
                             value={props.values.cep}
                             name="cep"
-                            placeholder="CEP"
+                            placeholder="cep"
                             maxLength={8}
                         />
                         {props.errors.foto && <div id="feedback">{props.errors.foto}</div>}
@@ -131,7 +131,7 @@ const Adicionar = () => {
                             onChange={props.handleChange}
                             onBlur={props.handleBlur}
                             value={props.values.nome}
-                            placeholder="Nome"
+                            placeholder="nome"
                             name="nome"
                         />
                         {props.errors.nome && <div id="feedback">{props.errors.nome}</div>}
@@ -142,7 +142,7 @@ const Adicionar = () => {
                             onChange={props.handleChange}
                             onBlur={props.handleBlur}
                             value={props.values.endereco}
-                            placeholder="Endereco"
+                            placeholder="endereco"
                             name="endereco"
                         />
                         {props.errors.endereco && <div id="feedback">{props.errors.endereco}</div>}
@@ -154,7 +154,7 @@ const Adicionar = () => {
                             onBlur={props.handleBlur}
                             value={props.values.estado}
                             name="estado"
-                            placeholder="Estado"
+                            placeholder="estado"
                             maxLength={2}
                         />
                         {props.errors.estado && <div id="feedback">{props.errors.endereco}</div>}

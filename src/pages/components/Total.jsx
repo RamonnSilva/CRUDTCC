@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
-import './Total.css'
-import ClienteService from './services/ClienteService';
+import '../styles/Total.css'
+import ClienteService from '../services/ClienteService';
 import Card from 'react-bootstrap/Card';
 
 

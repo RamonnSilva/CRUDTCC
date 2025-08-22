@@ -1,0 +1,105 @@
+/* Container de fundo */
+.login-background {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container do formulário */
+.login-container {
+    background: #fff;
+    padding: 32px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 400px;
+    min-width: 200px;
+    box-sizing: border-box;
+   margin-right: 400px; /* sempre centraliza horizontalmente */
+}
+
+/* Título do login */
+.login-container h2 {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+/* Labels e inputs */
+.login-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #dcdde1;
+    border-radius: 6px;
+    margin-top: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Botão */
+.login-container button {
+    width: 100%;
+    padding: 12px;
+    background: #273c75;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background 0.2s;
+}
+
+.login-container button:hover {
+    background: #40739e;
+}
+
+/* Reset estilos antigos */
+.container,
+.container input {
+    all: unset;
+}
+
+body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Responsivo para telas pequenas */
+@media (max-width: 460px) {
+    .login-container {
+        padding: 24px 16px;
+        max-width: 95vw;
+    }
+
+    .login-container h2 {
+        font-size: 1.5em;
+    }
+
+    .login-container input,
+    .login-container button {
+        font-size: 1em;
+        padding: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .login-container {
+        padding: 18px 12px;
+        max-width: 98vw;
+    }
+
+    .login-container h2 {
+        font-size: 1.3em;
+    }
+}

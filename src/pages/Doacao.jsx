@@ -4,7 +4,7 @@ import DoacaoService from './services/DoacaoService';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import "./Doacoes.css"
+import "./styles/Doacoes.css"
 
 const Doacoes = () => {
 
@@ -18,6 +18,7 @@ const Doacoes = () => {
     genero: '',
     autor: '',
     descricao: '',
+    email: '',
   }); 
   useEffect(() => {
     DoacaoService.getAllDoacoes()
@@ -50,6 +51,7 @@ const handleEdit = (doacao) => {
     genero: doacao.genero,
     autor: doacao.autor,
     descricao: doacao.descricao,
+    email: doacao.email,
   });
   setShowModal(true);
 };
@@ -111,6 +113,7 @@ const handleCloseModal = () => {
           <th>Genero</th>
           <th>Autor</th>
           <th>Descricao</th>
+          <th>Email</th>
           <th>STATUS</th>
         </tr>
       </thead>
@@ -139,6 +142,7 @@ const handleCloseModal = () => {
             <td>{doacao.genero}</td>
             <td>{doacao.autor}</td>
             <td>{doacao.descricao}</td>
+            <td>{doacao.email}</td>
             <td>
             <Button variant="outline-success" onClick={() => handleEdit(doacao)}>
                   Editar
@@ -215,6 +219,18 @@ const handleCloseModal = () => {
               value={editedDoacao.descricao}
               onChange={handleChange}
               placeholder="Digite a descricao"
+            />
+          </Form.Group>
+
+          
+          <Form.Group controlId="formEmail">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="text"
+              name="email"
+              value={editedDoacao.email}
+              onChange={handleChange}
+              placeholder="Digite o email"
             />
           </Form.Group>
         </Form>

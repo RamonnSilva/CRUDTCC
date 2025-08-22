@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
-import './Login.css';
+import './styles/Login.css';
 
 function Login({ aoEntrar }) {
     const { register, handleSubmit } = useForm();

@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import AdicionarDoacao from './pages/AdicionarDoacao';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { Button, Offcanvas } from 'react-bootstrap'; // ✅ Importações corrigidas
+import { Button, Offcanvas } from 'react-bootstrap'; 
 
 function App() {
   const [entrou, setEntrou] = useState(false);
@@ -29,6 +29,7 @@ function App() {
                <ul>
                   <li><Link to="/clientes">Clientes</Link></li>
                   <li><Link to="/adicionar">Adicionar Cliente</Link></li>
+                   
                   <li><Link to="/doacao">Doação</Link></li>
                   <li><Link to="/adicionardoacao">Adicionar Doacao</Link></li>
               </ul>
@@ -38,6 +39,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/clientes' element={<Clientes />} />
+           
           <Route path='/doacao' element={<Doacoes />} />
           <Route path='/adicionar' element={<Adicionar />} />
           <Route path='/adicionardoacao' element={<AdicionarDoacao />} />

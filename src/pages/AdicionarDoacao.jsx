@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
-import './AdicionarDoacao.css';
+import './styles/AdicionarDoacao.css';
 
 const AdicionarDoacao = () => {
   const [imagem, setImagem] = useState(null);
@@ -40,6 +40,7 @@ const AdicionarDoacao = () => {
           genero: '',
           autor: '',
           descricao: '',
+          email: '',
         }}
         onSubmit={(values) => {
           if (values.nome.length > 0) {
@@ -64,7 +65,7 @@ const AdicionarDoacao = () => {
                 type="text"
                 onChange={props.handleChange}
                 value={props.values.nome}
-                placeholder="Nome"
+                placeholder="nome"
                 name="nome"
               />
             </div>
@@ -74,7 +75,7 @@ const AdicionarDoacao = () => {
                 onChange={props.handleChange}
                 value={props.values.titulo}
                 name="titulo"
-                placeholder="Título"
+                placeholder="título"
               />
             </div>
             <div>
@@ -83,7 +84,7 @@ const AdicionarDoacao = () => {
                 onChange={props.handleChange}
                 value={props.values.genero}
                 name="genero"
-                placeholder="Gênero"
+                placeholder="gênero"
               />
             </div>
             <div>
@@ -92,7 +93,7 @@ const AdicionarDoacao = () => {
                 onChange={props.handleChange}
                 value={props.values.autor}
                 name="autor"
-                placeholder="Autor"
+                placeholder="autor"
               />
             </div>
             <div>
@@ -101,7 +102,17 @@ const AdicionarDoacao = () => {
                 onChange={props.handleChange}
                 value={props.values.descricao}
                 name="descricao"
-                placeholder="Descrição"
+                placeholder="descrição"
+              />
+            </div>
+
+              <div>
+              <input
+                type="text"
+                onChange={props.handleChange}
+                value={props.values.email}
+                name="email"
+                placeholder="email"
               />
             </div>
             <button type="submit">ADICIONAR</button>

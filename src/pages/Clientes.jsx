@@ -4,8 +4,8 @@ import ClienteService from './services/ClienteService';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import './Clientes.css';
-import Total from './Total'
+import './styles/Clientes.css';
+import Total from './components/Total'
 const Clientes = () => {
 
   const [busca, setBusca] = useState('');
