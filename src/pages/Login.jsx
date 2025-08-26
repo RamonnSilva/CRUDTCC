@@ -4,7 +4,6 @@ import './styles/Login.css';
 
 function Login({ aoEntrar }) {
     const { register, handleSubmit } = useForm();
-
    async function onSubmit(userData) {
     try {
     const response = await fetch('http://localhost:8080/auth/login', {
@@ -17,14 +16,24 @@ function Login({ aoEntrar }) {
         if (!response.ok) {
             throw new Error('Erro ao fazer login')
         }
-        const data = await response.json();
+
+             const data = await response.json();
+             console.log(data);
+            if (data.funcao !== 'ADMIN') {
+                  alert('Acesso negado: usuário não é ADMIN');
+            throw new Error('Acesso negado: usuário não é ADMIN');
+
+                }   else{
+
         localStorage.setItem('token', data.token);
 
         aoEntrar();
+                }
     } catch(error) {
         alert('erro ao fazer login: ' + error.message);
     }
    }
+
     return (
         <div className="login-background">
             <div className="login-container">
