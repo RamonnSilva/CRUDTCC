@@ -20,6 +20,7 @@ const Clientes = () => {
     telefone: '',
     endereco: '',
     estado: '',
+    funcao: '',
   }); 
   useEffect(() => {
     ClienteService.getAllClientes()
@@ -54,6 +55,7 @@ const handleEdit = (cliente) => {
     telefone: cliente.telefone,
     endereco: cliente.endereco,
     estado: cliente.estado,
+    funcao: cliente.funcao,
   });
   setShowModal(true);
 };
@@ -94,12 +96,12 @@ const handleCloseModal = () => {
     telefone: '',
     endereco: '',
     estado: '',
+    funcao: '',
   });
 };
   return (
     <>
     <div className='clientes-container'>
-      <Total/>
     <input 
         type="search"
         placeholder="Pesquisar cliente"
@@ -120,6 +122,7 @@ const handleCloseModal = () => {
           <th>Telefone</th>
           <th>Endereco</th>
           <th>Estado</th>
+          <th>Role</th>
           <th>STATUS</th>
         </tr>
       </thead>
@@ -145,6 +148,7 @@ const handleCloseModal = () => {
             <td>{cliente.telefone}</td>
             <td>{cliente.endereco}</td>
             <td>{cliente.estado}</td>
+            <td>{cliente.funcao}</td>
             <td>
             <Button variant="outline-success" onClick={() => handleEdit(cliente)}>
                   Editar
@@ -244,6 +248,16 @@ const handleCloseModal = () => {
               placeholder="Digite o estado"
             />
           </Form.Group>
+          <Form.Group controlId="formFuncao">
+            <Form.Label>Role</Form.Label>
+            <Form.Control
+              type="text"
+              name="funcao"
+              value={editedCliente.funcao}
+              onChange={handleChange}
+              placeholder="Digite o role"
+            />
+             </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>

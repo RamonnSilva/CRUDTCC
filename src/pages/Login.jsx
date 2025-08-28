@@ -1,10 +1,20 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import './styles/Login.css';
+import ReCAPTCHA from "react-google-recaptcha"
+
 
 function Login({ aoEntrar }) {
     const { register, handleSubmit } = useForm();
+    const [captchaValue, setCaptchaValue] = React.useState(null);
+    function onChange(value) {
+        setCaptchaValue(value);
+    }
    async function onSubmit(userData) {
+    if (!captchaValue) {
+        alert("Por favor, confirme que você não é um robô.");
+      return;
+    }
     try {
     const response = await fetch('http://localhost:8080/auth/login', {
         method: 'POST',
@@ -38,6 +48,7 @@ function Login({ aoEntrar }) {
         <div className="login-background">
             <div className="login-container">
                 <h2>Bem-vindo!</h2>
+                <img src='icone-removebg-preview.png' className="login-logo"></img>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <label>
                         <p>Email</p>
@@ -59,6 +70,11 @@ function Login({ aoEntrar }) {
                         />
                     </label>
                     <br />
+                       <ReCAPTCHA
+    sitekey="6Lc7D7UrAAAAAG-csfepJv7bphrj1LrxXnFHEV0Q"
+    onChange={onChange}
+  />
+
                     <button type="submit">Entrar</button>
                 </form>
             </div>

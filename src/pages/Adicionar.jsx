@@ -35,6 +35,7 @@ const Adicionar = () => {
                 telefone: '',
                 endereco: '',
                 estado: '',
+                funcao: '',
             }}
             onSubmit={(values, actions) => {
 
@@ -48,6 +49,7 @@ const Adicionar = () => {
                             telefone: values.telefone,
                             endereco: values.endereco,
                             estado: values.estado,
+                            funcao: values.funcao,
                         })
                         setClicou(true)
                         // alert(JSON.stringify(values, null, 2));
@@ -125,17 +127,7 @@ const Adicionar = () => {
                         />
                         {props.errors.preco && <div id="feedback">{props.errors.preco}</div>}
                     </div>
-                       <div>
-                        <input
-                            type="text"
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                            value={props.values.nome}
-                            placeholder="nome"
-                            name="nome"
-                        />
-                        {props.errors.nome && <div id="feedback">{props.errors.nome}</div>}
-                    </div>
+                     
                         <div>
                         <input
                             type="text"
@@ -157,7 +149,20 @@ const Adicionar = () => {
                             placeholder="estado"
                             maxLength={2}
                         />
-                        {props.errors.estado && <div id="feedback">{props.errors.endereco}</div>}
+                          {props.errors.estado && <div id="feedback">{props.errors.endereco}</div>}
+                          <div>
+                      <select className='select-role'
+                        name="funcao"
+                        value={props.values.funcao}
+                        onChange={props.handleChange}
+                        onBlur={props.handleBlur}
+                        required>
+                        <option value="" label="Selecione a função" />
+                        <option value="ADMIN" label="ADMIN" />  
+                        <option value="USER" label="USER" />
+                        </select>
+                        {props.errors.nome && <div id="feedback">{props.errors.role}</div>}
+                    </div>
                         </div>
                  <button type="submit" >ADICIONAR</button>
                     

@@ -64,3 +64,12 @@
   font-size: 0.95em;
   margin-top: 4px;
 }
+.select-role{
+    width: 91%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #dcdde1;
+    font-size: 16px;
+    margin-top: 8px;
+    background: #f5f6fa;
+}
