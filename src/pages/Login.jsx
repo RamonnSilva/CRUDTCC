@@ -71,7 +71,7 @@ function Login({ aoEntrar }) {
                     </label>
                     <br />
                        <ReCAPTCHA
-    sitekey= */colocar sua chave aqui /*
+    sitekey= "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
     onChange={onChange}
   />
 
