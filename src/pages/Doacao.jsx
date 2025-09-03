@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import "./styles/Doacoes.css"
+import { Link } from 'react-router-dom';
 
 const Doacoes = () => {
 
@@ -94,6 +95,7 @@ const handleCloseModal = () => {
 };
   return (
     <>
+    <div className='first-container'>
     <input 
         type="search"
         placeholder="Pesquisar doacao"
@@ -101,9 +103,12 @@ const handleCloseModal = () => {
         value = {busca}
         onChange={ e => setBusca(e.target.value)}
       />
+      <Link to="/adicionardoacao">
+         <Button variant="warning" className='adicionar-2'>+</Button>{''}
+      </Link>
+      </div>
 
-
-    <Table hover variant='dark' className='tabela'>
+   <Table striped bordered hover variant='white' className="custom-table">
       <thead>
         <tr>
           <th>id</th>

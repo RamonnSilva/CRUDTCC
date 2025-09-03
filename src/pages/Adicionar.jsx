@@ -3,18 +3,17 @@ import { Formik } from 'formik';
 import axios from 'axios';
 import './styles/Adicionar.css'
 import { Link } from 'react-router-dom';
-
-
+import Alerta from './components/Alert.jsx';
+import Button from './components/Button.jsx';
 const Adicionar = () => {
 
     const [dados, setDados] = useState({})
     const [clicou, setClicou] = useState(false)
-
     function enviarDados(){
         axios.post('http://localhost:8080/auth/register', 
             dados
         ).then(response => console.log(response))
-        .then(dados => alert('Dados enviados com sucesso'))
+        .then(dados => alert('Cliente adicionado com sucesso!'))
         .catch(error => console.log(error))
     }
     
@@ -164,7 +163,7 @@ const Adicionar = () => {
                         {props.errors.nome && <div id="feedback">{props.errors.role}</div>}
                     </div>
                         </div>
-                 <button type="submit" >ADICIONAR</button>
+                <Button/>
                     
                 </form>
             )}

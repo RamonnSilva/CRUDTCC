@@ -6,6 +6,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import './styles/Clientes.css';
 import Total from './components/Total'
+import { Link } from 'react-router-dom';
 const Clientes = () => {
 
   const [busca, setBusca] = useState('');
@@ -101,17 +102,23 @@ const handleCloseModal = () => {
 };
   return (
     <>
+     
     <div className='clientes-container'>
-    <input 
+      <div className='second-container'>
+   <input 
         type="search"
         placeholder="Pesquisar cliente"
         id="input-search"
         value = {busca}
         onChange={ e => setBusca(e.target.value)}
       />
+      <Link to="/Adicionar">
+         <Button variant="warning" className='adicionar'>+</Button>{''}
+      </Link>
+      </div>
+      
 
-
-    <Table hover variant='dark' className='tabela'>
+ <Table striped bordered hover variant='white' className="custom-table">
       <thead>
         <tr>
           <th>id</th>

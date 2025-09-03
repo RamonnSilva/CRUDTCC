@@ -25,13 +25,12 @@ function App() {
     <BrowserRouter>
     <>
     <header>
+       <img src='public\icone-png.png' alt='Logo da Empresa' className='logo'/>
       <nav>
                <ul>
-                  <li><Link to="/clientes">Clientes</Link></li>
-                  <li><Link to="/adicionar">Adicionar Cliente</Link></li>
-                   
-                  <li><Link to="/doacao">Doação</Link></li>
-                  <li><Link to="/adicionardoacao">Adicionar Doacao</Link></li>
+                  <Link to="/clientes"><img  className="user"src='public\icons8-usuário-60.png'></img></Link>  
+                  <Link to="/doacao"><img src="public\icons8-doar-50.png"></img></Link>
+                  
               </ul>
               </nav>
          </header>
@@ -39,7 +38,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/clientes' element={<Clientes />} />
-           
           <Route path='/doacao' element={<Doacoes />} />
           <Route path='/adicionar' element={<Adicionar />} />
           <Route path='/adicionardoacao' element={<AdicionarDoacao />} />

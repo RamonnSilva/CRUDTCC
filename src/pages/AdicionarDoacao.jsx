@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 import './styles/AdicionarDoacao.css';
-
+import Button from './components/Button.jsx';
 const AdicionarDoacao = () => {
   const [imagem, setImagem] = useState(null);
 
@@ -115,7 +115,7 @@ const AdicionarDoacao = () => {
                 placeholder="email"
               />
             </div>
-            <button type="submit">ADICIONAR</button>
+      <Button/>
           </form>
         )}
       </Formik>

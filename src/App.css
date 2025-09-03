@@ -63,6 +63,8 @@ h1{
 }
 
 body{
+  margin: 0;
+  display: flex;
   overflow: hidden;
 }
 .container{
@@ -74,21 +76,24 @@ body{
   margin-right: auto;
 }
 header{
-    position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 64px;
-  background-color: #2563EB;
+  position: fixed;
+  height: 864px;
+  width: 80px; 
+  top:0;
+  left:0; 
+  background-color: #1E3A5F;
   color: #fff;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 header nav ul {
   display: flex;
   gap: 32px;
+   flex-direction: column;
   margin: 0;
   padding: 0 32px;
   list-style: none;
@@ -114,4 +119,13 @@ header nav ul li a {
 header nav ul li a:hover {
    background: #273c75;
   color: #fff;
+}
+.user{
+  height:50px;
+  width:50px;
+}
+.sair{
+  height:50px;
+  width:50px;
+  margin-top:500px;
 }
