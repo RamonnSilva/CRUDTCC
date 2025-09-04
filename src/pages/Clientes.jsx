@@ -7,6 +7,8 @@ import Form from 'react-bootstrap/Form';
 import './styles/Clientes.css';
 import Total from './components/Total'
 import { Link } from 'react-router-dom';
+import { FaPencil } from "react-icons/fa6";
+import { MdDeleteForever } from "react-icons/md";
 const Clientes = () => {
 
   const [busca, setBusca] = useState('');
@@ -157,14 +159,14 @@ const handleCloseModal = () => {
             <td>{cliente.estado}</td>
             <td>{cliente.funcao}</td>
             <td>
-            <Button variant="outline-success" onClick={() => handleEdit(cliente)}>
-                  Editar
+            <Button variant="success" onClick={() => handleEdit(cliente)}>
+                  <FaPencil />
                 </Button>
             <Button 
-                  variant="outline-danger" 
+                  variant="danger" 
                   onClick={() => handleDelete(cliente.id)}
                 id ="btn-delete">
-                  Excluir
+                  <MdDeleteForever />
                 </Button>
             </td>
           </tr>

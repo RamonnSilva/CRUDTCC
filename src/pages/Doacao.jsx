@@ -6,6 +6,9 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import "./styles/Doacoes.css"
 import { Link } from 'react-router-dom';
+import { FaPencil } from "react-icons/fa6";
+import { MdDeleteForever } from "react-icons/md";
+import { IoAddCircleOutline } from "react-icons/io5";
 
 const Doacoes = () => {
 
@@ -149,14 +152,14 @@ const handleCloseModal = () => {
             <td>{doacao.descricao}</td>
             <td>{doacao.email}</td>
             <td>
-            <Button variant="outline-success" onClick={() => handleEdit(doacao)}>
-                  Editar
+            <Button variant="success" onClick={() => handleEdit(doacao)}>
+                    <FaPencil />
                 </Button>
             <Button 
-                  variant="outline-danger" 
+                  variant="danger" 
                   onClick={() => handleDelete(doacao.id)}
                 id ="btn-delete">
-                  Excluir
+                  <MdDeleteForever />
                 </Button>
             </td>
           </tr>
