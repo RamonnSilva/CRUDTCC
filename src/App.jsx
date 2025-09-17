@@ -5,6 +5,7 @@ import Clientes from './pages/Clientes';
 import Adicionar from './pages/Adicionar';
 import Doacoes from './pages/Doacao';
 import Login from './pages/Login';
+import Pedidos from './pages/Pedidos';
 import AdicionarDoacao from './pages/AdicionarDoacao';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
@@ -30,6 +31,7 @@ function App() {
                <ul>
                   <Link to="/clientes"><img  className="user"src='public\icons8-usuário-60.png'></img></Link>  
                   <Link to="/doacao"><img src="public\icons8-doar-50.png"></img></Link>
+                  <Link to="/pedido"><img src="public\icons8-truck-50.png"></img></Link>
                   
               </ul>
               </nav>
@@ -39,6 +41,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/clientes' element={<Clientes />} />
           <Route path='/doacao' element={<Doacoes />} />
+           <Route path='/pedido' element={<Pedidos />} />
           <Route path='/adicionar' element={<Adicionar />} />
           <Route path='/adicionardoacao' element={<AdicionarDoacao />} />
         </Routes>

@@ -5,16 +5,17 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import './styles/Clientes.css';
-import Total from './components/Total'
 import { Link } from 'react-router-dom';
 import { FaPencil } from "react-icons/fa6";
 import { MdDeleteForever } from "react-icons/md";
-const Clientes = () => {
 
+const Clientes = () => {
   const [busca, setBusca] = useState('');
   const [clientes, setClientes] = useState([]);
   const [showModal, setShowModal] = useState(false); 
-  const [editClienteId, setEditClienteId] = useState(null); 
+  const [editClienteId, setEditClienteId] = useState(null);
+  const [estado, setEstado] = useState('');
+  const [funcao, setFuncao] = useState('');
   const [editedCliente, setEditedCliente] = useState({
     nome: '',
     email: '',
@@ -25,262 +26,182 @@ const Clientes = () => {
     estado: '',
     funcao: '',
   }); 
+
   useEffect(() => {
     ClienteService.getAllClientes()
-      .then(response => {
-        const clientes = response.data;
-        setClientes(clientes);
-        console.log(clientes);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      .then(response => setClientes(response.data))
+      .catch(error => console.log(error));
   }, []);
 
   const handleDelete = (id) => {
     ClienteService.deleteClientes(id)
-    .then(() =>{
-      setClientes(prevClientes => prevClientes.filter(cliente => cliente.id !== id));
-      console.log(`Cliente com ID ${id} foi deletado.`);
-    })
-    .catch(error => {
-      console.log('Erro ao deletar cliente:', error);
+      .then(() => {
+        setClientes(prev => prev.filter(c => c.id !== id));
+      })
+      .catch(error => console.log('Erro ao deletar cliente:', error));
+  };
+
+  const handleEdit = (cliente) => {
+    setEditClienteId(cliente.id);
+    setEditedCliente({ ...cliente });
+    setShowModal(true);
+  };
+
+  const handleUpdate = () => {
+    if (!editClienteId) return;
+
+    ClienteService.updateCliente(editClienteId, editedCliente)
+      .then(() => {
+        setClientes(prev => prev.map(c => c.id === editClienteId ? { ...c, ...editedCliente } : c));
+        setShowModal(false);
+      })
+      .catch(error => console.error('Erro ao atualizar cliente:', error));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setEditedCliente(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setEditClienteId(null);
+    setEditedCliente({
+      nome: '',
+      email: '',
+      senha: '',
+      cep: '',
+      telefone: '',
+      endereco: '',
+      estado: '',
+      funcao: '',
     });
-};
-//isso aqui com certeza vai dar erro no futuro, não me pergunte como isso está funcionando
-const handleEdit = (cliente) => {
-  setEditClienteId(cliente.id);
-  setEditedCliente({
-    nome: cliente.nome,
-    email: cliente.email,
-    senha: cliente.senha,
-    cep: cliente.cep,
-    telefone: cliente.telefone,
-    endereco: cliente.endereco,
-    estado: cliente.estado,
-    funcao: cliente.funcao,
-  });
-  setShowModal(true);
-};
+  };
 
-const handleUpdate = () => {
-  if (!editClienteId) return;
+  // Pega todos os estados únicos para popular o select
+  const estados = [...new Set(clientes.map(c => c.estado))];
+  const funcoes = [...new Set(clientes.map(c => c.funcao))];
 
-  ClienteService.updateCliente(editClienteId, editedCliente)
-    .then(() => {
-      setClientes(prevClientes =>
-        prevClientes.map(cliente =>
-          cliente.id === editClienteId ? { ...cliente, ...editedCliente } : cliente
-        )
-      );
-      setShowModal(false);
-      console.log(`Cliente com ID ${editClienteId} foi atualizado.`);
-    })
-    .catch(error => {
-      console.error('Erro ao atualizar cliente:', error);
-    });
-};
-
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setEditedCliente(prevState => ({
-    ...prevState,
-    [name]: value,
-  }));
-};
-const handleCloseModal = () => {
-  setShowModal(false);
-  setEditClienteId(null);
-  setEditedCliente({
-    nome: '',
-    email: '',
-    senha: '',
-    cep: '',
-    telefone: '',
-    endereco: '',
-    estado: '',
-    funcao: '',
-  });
-};
   return (
     <>
-     
-    <div className='clientes-container'>
-      <div className='second-container'>
-   <input 
-        type="search"
-        placeholder="Pesquisar cliente"
-        id="input-search"
-        value = {busca}
-        onChange={ e => setBusca(e.target.value)}
-      />
-      <Link to="/Adicionar">
-         <Button variant="warning" className='adicionar'>+</Button>{''}
-      </Link>
+      <div className="search-add-container">
+        <Form.Control
+          type="search"
+          placeholder="Pesquisar cliente"
+          value={busca}
+          onChange={e => setBusca(e.target.value)}
+          className="input-search"
+        />
+<div className='select-filters'>
+        <select
+          value={estado}
+          onChange={e => setEstado(e.target.value)}
+          className="input-search-select"
+        >
+          <option value="">Todos os bairros</option>
+          {estados.map(e => <option key={e} value={e}>{e}</option>)}
+        </select>
+
+          <select
+          value={funcao}
+          onChange={e => setFuncao(e.target.value)}
+          className="input-search-select-role"
+        >
+          <option value="">Funcao</option>
+          {funcoes.map(e => <option key={e} value={e}>{e}</option>)}
+        </select>
+        </div>
       </div>
-      
 
- <Table striped bordered hover variant='white' className="custom-table">
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>Nome</th>
-          <th>Email</th>
-          <th>Senha</th>
-          <th>Cep</th>
-          <th>Telefone</th>
-          <th>Endereco</th>
-          <th>Estado</th>
-          <th>Role</th>
-          <th>STATUS</th>
-        </tr>
-      </thead>
-      <tbody className="table-group-divider">
-        {clientes
-        .filter(cliente =>
-           cliente.nome.toLowerCase().includes(busca.toLowerCase()) ||
-            cliente.email.toLowerCase().includes(busca.toLowerCase()) ||
-            cliente.cep.toLowerCase().includes(busca.toLowerCase()) ||
-            cliente.telefone.toLowerCase().includes(busca.toLowerCase()) ||
-            cliente.endereco.toLowerCase().includes(busca.toLowerCase()) ||
-            cliente.estado.toLowerCase().includes(busca.toLowerCase())
-        )
-        
-        
-        .map(cliente => (
-          <tr key={cliente.id}>
-            <td>{cliente.id}</td>
-            <td>{cliente.nome}</td>
-            <td>{cliente.email}</td>
-            <td>{cliente.senha}</td>
-            <td>{cliente.cep}</td>
-            <td>{cliente.telefone}</td>
-            <td>{cliente.endereco}</td>
-            <td>{cliente.estado}</td>
-            <td>{cliente.funcao}</td>
-            <td>
-            <Button variant="success" onClick={() => handleEdit(cliente)}>
-                  <FaPencil />
-                </Button>
-            <Button 
-                  variant="danger" 
-                  onClick={() => handleDelete(cliente.id)}
-                id ="btn-delete">
-                  <MdDeleteForever />
-                </Button>
-            </td>
+      <div className='clientes-container'>
+        <Link to="/Adicionar">
+          <Button variant="warning" className='adicionar'>+</Button>
+        </Link>
+      </div>
+
+      <Table striped bordered hover variant='white' className="custom-table">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Senha</th>
+            <th>Cep</th>
+            <th>Telefone</th>
+            <th>Endereco</th>
+            <th>Estado</th>
+            <th>Role</th>
+            <th>STATUS</th>
           </tr>
-        ))}
-      </tbody>
-      
+        </thead>
+        <tbody className="table-group-divider">
+          {clientes
+            .filter(cliente => (
+              (cliente.nome.toLowerCase().includes(busca.toLowerCase()) ||
+               cliente.email.toLowerCase().includes(busca.toLowerCase()) ||
+               cliente.cep.toLowerCase().includes(busca.toLowerCase()) ||
+               cliente.telefone.toLowerCase().includes(busca.toLowerCase()) ||
+               cliente.endereco.toLowerCase().includes(busca.toLowerCase()) ||
+               cliente.estado.toLowerCase().includes(busca.toLowerCase())) ||
+               cliente.funcao.toLowerCase().includes(busca.toLowerCase()))
+               && (estado === '' || cliente.estado === estado)
+               && (funcao === '' || cliente.funcao === funcao)
+            )
+            .map(cliente => (
+              <tr key={cliente.id}>
+                <td>{cliente.id}</td>
+                <td>{cliente.nome}</td>
+                <td>{cliente.email}</td>
+                <td>{cliente.senha}</td>
+                <td>{cliente.cep}</td>
+                <td>{cliente.telefone}</td>
+                <td>{cliente.endereco}</td>
+                <td>{cliente.estado}</td>
+                <td>{cliente.funcao}</td>
+                <td>
+                  <Button variant="success" onClick={() => handleEdit(cliente)}>
+                    <FaPencil />
+                  </Button>
+                  <Button variant="danger" onClick={() => handleDelete(cliente.id)}>
+                    <MdDeleteForever />
+                  </Button>
+                </td>
+              </tr>
+          ))}
+        </tbody>
+      </Table>
 
-
-    </Table>
-    </div>
       <Modal show={showModal} onHide={handleCloseModal}>
-      <Modal.Header closeButton>
-        <Modal.Title>Editar Cliente</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Form>
-          <Form.Group controlId="formNome">
-            <Form.Label>Nome</Form.Label>
-            <Form.Control
-              type="text"
-              name="nome"
-              value={editedCliente.nome}
-              onChange={handleChange}
-              placeholder="Digite o nome"
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              name="email"
-              value={editedCliente.email}
-              onChange={handleChange}
-              placeholder="Digite o email"
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formSenha">
-            <Form.Label>Senha</Form.Label>
-            <Form.Control
-              type="password"
-              name="senha"
-              value={editedCliente.senha}
-              onChange={handleChange}
-              placeholder="Digite a senha"
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formCep">
-            <Form.Label>Cep</Form.Label>
-            <Form.Control
-              type="text"
-              name="cep"
-              value={editedCliente.cep}
-              onChange={handleChange}
-              placeholder="Digite o Cep"
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formTelefone">
-            <Form.Label>Telefone</Form.Label>
-            <Form.Control
-              type="text"
-              name="telefone"
-              value={editedCliente.telefone}
-              onChange={handleChange}
-              placeholder="Digite o telefone"
-            />
-            </Form.Group>
-             <Form.Group controlId="formEndereco">
-            <Form.Label>Endereco</Form.Label>
-            <Form.Control
-              type="text"
-              name="endereco"
-              value={editedCliente.endereco}
-              onChange={handleChange}
-              placeholder="Digite o endereco"
-            />
-           </Form.Group>
-             <Form.Group controlId="formEstado">
-            <Form.Label>Estado</Form.Label>
-            <Form.Control
-              type="text"
-              name="estado"
-              value={editedCliente.estado}
-              onChange={handleChange}
-              placeholder="Digite o estado"
-            />
-          </Form.Group>
-          <Form.Group controlId="formFuncao">
-            <Form.Label>Role</Form.Label>
-            <Form.Control
-              type="text"
-              name="funcao"
-              value={editedCliente.funcao}
-              onChange={handleChange}
-              placeholder="Digite o role"
-            />
-             </Form.Group>
-        </Form>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleCloseModal}>
-          Cancelar
-        </Button>
-        <Button variant="success" onClick={handleUpdate}>
-          Salvar
-        </Button>
-      </Modal.Footer>
-    </Modal>
+        <Modal.Header closeButton>
+          <Modal.Title>Editar Cliente</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            {Object.keys(editedCliente).map(key => (
+              <Form.Group controlId={`form${key}`} key={key}>
+                <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1)}</Form.Label>
+                <Form.Control
+                  type={key === 'senha' ? 'password' : 'text'}
+                  name={key}
+                  value={editedCliente[key]}
+                  onChange={handleChange}
+                  placeholder={`Digite o ${key}`}
+                />
+              </Form.Group>
+            ))}
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseModal}>
+            Cancelar
+          </Button>
+          <Button variant="success" onClick={handleUpdate}>
+            Salvar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
-
 
 export default Clientes;

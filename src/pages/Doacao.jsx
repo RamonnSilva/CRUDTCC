@@ -21,7 +21,7 @@ const Doacoes = () => {
     autor: '',
     descricao: '',
     email: '',
-    doador: { id: '' }
+    doadorid: '' 
   });
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const Doacoes = () => {
       autor: doacao.autor || '',
       descricao: doacao.descricao || '',
       email: doacao.email || '',
-      doador: { id: doacao.doador?.id || doacao.doadorid || '' }
+      doadorid: doacao.doadorid || ''
     });
     setShowModal(true);
   };
@@ -104,7 +104,7 @@ const Doacoes = () => {
       autor: '',
       descricao: '',
       email: '',
-      doador: { id: '' }
+      doadorid: ''
     });
   };
 
@@ -149,7 +149,7 @@ const Doacoes = () => {
             .map(doacao => (
               <tr key={doacao.id}>
                 <td>{doacao.id}</td>
-                <td>{doacao.doador?.id || doacao.doadorid}</td>
+              <td>{doacao.doador ? doacao.doador.id : ''}</td>
                 <td>{doacao.imagem ? (
                   <img
                     src={`http://localhost:8080/doacao/${doacao.id}/imagem`}
