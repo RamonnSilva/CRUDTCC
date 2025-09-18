@@ -25,6 +25,7 @@ th{
   gap: 16px; /* espaço entre search e selects */
   margin: 40px 0 20px 0;
   max-width: 600px;
+  margin-top:-20px;
 }
 
 .input-search {
@@ -56,21 +57,73 @@ th{
 
 .clientes-container {
   width: 100%;
-  max-width: 1400px;
+  max-width: none;    /* remova o limite para não cortar a tabela */
   margin-top: 120px;
-  padding: 0 16px;
+  padding: 0 0;
 }
-.adicionar{
-  margin-left:1200px;
-  margin-top:30px;
-  padding:20px;
-  width:60px;
-  height:60px;
-  font-size: 80px;
+.adicionar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* espaço entre ícone e texto */
+  margin: -160px 0 24px 0;
+  width: auto; /* permite crescer para caber o texto */
+  margin-right:1200px;
+  min-width: 64px;
+  height: 45px;
+  padding: 0 8px;
+  border-radius: 32px;
+  background: blue;
+  color: #fff;
+  font-size: 2.5rem;
+  border: none;
+  box-shadow: 0 4px 16px rgba(37,99,235,0.15);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  cursor: pointer;
 }
 
+.adicionar:hover, .adicionar:focus {
+  background: linear-gradient(135deg, #1d4ed8 60%, #3b82f6 100%);
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.22);
+  color: #fff;
+}
+
+.add-user-text {
+  font-size: 1.3rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-left: 4px;
+  margin-top: 2px;
+}
+
+.plus-icon {
+  font-size: 2.2rem;
+  font-weight: bold;
+  line-height: 1;
+  margin-top: -2px;
+}
+
+.clientes-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(30,58,95,0.13);
+  padding: 40px 32px 32px 32px;
+  margin: 40px auto 0 auto;
+  max-width: 1400px;    /* ocupa quase toda a largura da tela */
+  min-width: 320px;
+  width: 98vw;        /* ocupa quase toda a largura da tela */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  /* overflow-x: auto;  NÃO coloque overflow aqui */
+}
 
 .custom-table {
+  min-width: 900px;
+  max-width:1300px;   /* garante largura mínima para não quebrar colunas */
+  width: 100%;
   border-radius: 12px;
   overflow: hidden;
   background: #fff;
@@ -78,7 +131,7 @@ th{
 }
 
 .custom-table thead th {
-  background: blue;
+   background:  #1E3A5F;
   color: #fff;
   text-align: center;
   font-weight: 600;
@@ -121,6 +174,7 @@ th{
 
 .input-search-select option,
 .input-search-select-role option {
+     background:#1E3A5F;
   color: #1E3A5F;
   background: #fff;
   font-size: 1em;

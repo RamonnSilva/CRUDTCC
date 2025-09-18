@@ -4,6 +4,7 @@ import ClienteService from './services/ClienteService';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import Total from './components/Total.jsx'
 import './styles/Clientes.css';
 import { Link } from 'react-router-dom';
 import { FaPencil } from "react-icons/fa6";
@@ -84,92 +85,94 @@ const Clientes = () => {
 
   return (
     <>
-      <div className="search-add-container">
-        <Form.Control
-          type="search"
-          placeholder="Pesquisar cliente"
-          value={busca}
-          onChange={e => setBusca(e.target.value)}
-          className="input-search"
-        />
-<div className='select-filters'>
-        <select
-          value={estado}
-          onChange={e => setEstado(e.target.value)}
-          className="input-search-select"
-        >
-          <option value="">Todos os bairros</option>
-          {estados.map(e => <option key={e} value={e}>{e}</option>)}
-        </select>
-
-          <select
-          value={funcao}
-          onChange={e => setFuncao(e.target.value)}
-          className="input-search-select-role"
-        >
-          <option value="">Funcao</option>
-          {funcoes.map(e => <option key={e} value={e}>{e}</option>)}
-        </select>
+      <div className="clientes-card">
+        <Total /> {/* Aqui está correto! */}
+        <div className="search-add-container">
+          <Form.Control
+            type="search"
+            placeholder="Pesquisar cliente"
+            value={busca}
+            onChange={e => setBusca(e.target.value)}
+            className="input-search"
+          />
+          <div className='select-filters'>
+            <select
+              value={estado}
+              onChange={e => setEstado(e.target.value)}
+              className="input-search-select"
+            >
+              <option value="">Estado</option>
+              {estados.map(e => <option key={e} value={e}>{e}</option>)}
+            </select>
+            <select
+              value={funcao}
+              onChange={e => setFuncao(e.target.value)}
+              className="input-search-select-role"
+            >
+              <option value="">Funcao</option>
+              {funcoes.map(e => <option key={e} value={e}>{e}</option>)}
+            </select>
+           
+          </div>
         </div>
-      </div>
+        <div className='clientes-container'>
+          <Link to="/Adicionar">
+            <Button variant="primary" className='adicionar'>Add New User</Button>
+          </Link>
+        </div>
 
-      <div className='clientes-container'>
-        <Link to="/Adicionar">
-          <Button variant="warning" className='adicionar'>+</Button>
-        </Link>
+        <Table striped bordered hover variant='white' className="custom-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NOME</th>
+              <th>EMAIL</th>
+              <th>SENHA</th>
+              <th>CEP</th>
+              <th>TELEFONE</th>
+              <th>ENDEREÇO</th>
+              <th>ESTADO</th>
+              <th>ROLE</th>
+              <th>STATUS</th>
+            </tr>
+          </thead>
+          <tbody className="table-group-divider">
+            {clientes
+              .filter(cliente => (
+                (cliente.nome.toLowerCase().includes(busca.toLowerCase()) ||
+                 cliente.email.toLowerCase().includes(busca.toLowerCase()) ||
+                 cliente.cep.toLowerCase().includes(busca.toLowerCase()) ||
+                 cliente.telefone.toLowerCase().includes(busca.toLowerCase()) ||
+                 cliente.endereco.toLowerCase().includes(busca.toLowerCase()) ||
+                 cliente.estado.toLowerCase().includes(busca.toLowerCase())) ||
+                 cliente.funcao.toLowerCase().includes(busca.toLowerCase()))
+                 && (estado === '' || cliente.estado === estado)
+                 && (funcao === '' || cliente.funcao === funcao)
+              )
+              .map(cliente => (
+                <tr key={cliente.id}>
+                  <td>{cliente.id}</td>
+                  <td>{cliente.nome}</td>
+                  <td>{cliente.email}</td>
+                  <td>{cliente.senha}</td>
+                  <td>{cliente.cep}</td>
+                  <td>{cliente.telefone}</td>
+                  <td>{cliente.endereco}</td>
+                  <td>{cliente.estado}</td>
+                  <td>{cliente.funcao}</td>
+                  <td>
+                    <Button variant="success" onClick={() => handleEdit(cliente)}>
+                      <FaPencil />
+                    </Button>
+                    <Button variant="danger" onClick={() => handleDelete(cliente.id)}>
+                      <MdDeleteForever />
+                    </Button>
+                  </td>
+                </tr>
+            ))}
+          </tbody>
+        </Table>
       </div>
-
-      <Table striped bordered hover variant='white' className="custom-table">
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>Nome</th>
-            <th>Email</th>
-            <th>Senha</th>
-            <th>Cep</th>
-            <th>Telefone</th>
-            <th>Endereco</th>
-            <th>Estado</th>
-            <th>Role</th>
-            <th>STATUS</th>
-          </tr>
-        </thead>
-        <tbody className="table-group-divider">
-          {clientes
-            .filter(cliente => (
-              (cliente.nome.toLowerCase().includes(busca.toLowerCase()) ||
-               cliente.email.toLowerCase().includes(busca.toLowerCase()) ||
-               cliente.cep.toLowerCase().includes(busca.toLowerCase()) ||
-               cliente.telefone.toLowerCase().includes(busca.toLowerCase()) ||
-               cliente.endereco.toLowerCase().includes(busca.toLowerCase()) ||
-               cliente.estado.toLowerCase().includes(busca.toLowerCase())) ||
-               cliente.funcao.toLowerCase().includes(busca.toLowerCase()))
-               && (estado === '' || cliente.estado === estado)
-               && (funcao === '' || cliente.funcao === funcao)
-            )
-            .map(cliente => (
-              <tr key={cliente.id}>
-                <td>{cliente.id}</td>
-                <td>{cliente.nome}</td>
-                <td>{cliente.email}</td>
-                <td>{cliente.senha}</td>
-                <td>{cliente.cep}</td>
-                <td>{cliente.telefone}</td>
-                <td>{cliente.endereco}</td>
-                <td>{cliente.estado}</td>
-                <td>{cliente.funcao}</td>
-                <td>
-                  <Button variant="success" onClick={() => handleEdit(cliente)}>
-                    <FaPencil />
-                  </Button>
-                  <Button variant="danger" onClick={() => handleDelete(cliente.id)}>
-                    <MdDeleteForever />
-                  </Button>
-                </td>
-              </tr>
-          ))}
-        </tbody>
-      </Table>
 
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>

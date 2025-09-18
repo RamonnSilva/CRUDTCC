@@ -23,14 +23,7 @@ const Total = () => {
 
   return(
     <>
-     <Card className='total-card' style={{ width: '18rem' }}>
-      <Card.Body>
-        <Card.Title>Cliente Cadastrados</Card.Title>
-        <Card.Text>
-         {total}
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <h1 style={{ fontSize: '20px', color: 'black', marginLeft: '630px', marginTop: '-8px' }}>All Users: {total}</h1>
  </>
   )
 }
