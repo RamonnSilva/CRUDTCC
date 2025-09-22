@@ -14,6 +14,9 @@ const Doacoes = () => {
   const [doacoes, setDoacoes] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editDoacaoId, setEditDoacaoId] = useState(null);
+    const [genero, setGenero] = useState('');
+    const [autor, setAutor] = useState('');
+    const [funcao, setFuncao] = useState('');
   const [editedDoacao, setEditedDoacao] = useState({
     nome: '',
     titulo: '',
@@ -108,6 +111,8 @@ const Doacoes = () => {
     });
   };
 
+  const generos = [...new Set(doacoes.map(c => c.genero))];
+  const autores = [...new Set(doacoes.map(c => c.autor))];
   return (
     <>
       <div className='first-container'>
@@ -121,7 +126,26 @@ const Doacoes = () => {
         <Link to="/adicionardoacao">
           <Button variant="warning" className='adicionar-2'>+</Button>
         </Link>
-      </div>
+         <div className='select-filters'>
+            <select
+                value={genero}
+              onChange={e => setGenero(e.target.value)}
+              className="input-search-select"
+            >
+              <option value="">Genero</option>
+              {generos.map(e => <option key={e} value={e}>{e}</option>)}
+            </select>
+            <select
+              value={autor}
+              onChange={e => setAutor(e.target.value)}
+              className="input-search-select-role"
+            >
+              <option value="">Autor</option>
+              {autores.map(e => <option key={e} value={e}>{e}</option>)}
+            </select>
+           
+          </div>
+        </div>
 
       <Table striped bordered hover variant='white' className="custom-table">
         <thead>
@@ -145,6 +169,8 @@ const Doacoes = () => {
               doacao.titulo.toLowerCase().includes(busca.toLowerCase()) ||
               doacao.genero.toLowerCase().includes(busca.toLowerCase()) ||
               doacao.autor.toLowerCase().includes(busca.toLowerCase())
+                && (genero === '' || doacao.genero === genero)
+                && (autor === '' ||  doacao.autor === autor)
             )
             .map(doacao => (
               <tr key={doacao.id}>
