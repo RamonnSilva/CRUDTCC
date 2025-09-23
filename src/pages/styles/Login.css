@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right:500px;
+    margin-right:300px;
     padding: 0;
 }
 
@@ -19,7 +19,7 @@
     max-width: 400px;
     min-width: 200px;
     box-sizing: border-box;
-    margin-right: 400px;
+    margin-right: 600px;
 }
 
 /* Título do login */

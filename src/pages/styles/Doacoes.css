@@ -1,4 +1,3 @@
-
 .table-group-divider{
     background-color: #000;
 }
@@ -38,9 +37,123 @@ th{
   padding: 20px;
 }
 
-.adicionar-2{
-  margin-left:1000px;
-  width:60px;
-  height:60px;
-  font-size: 80px;
+.adicionar-2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 24px  0 auto; /* centraliza e dá espaço acima */
+  min-width: 64px;
+  height: 45px;
+  padding: 0 16px;
+  border-radius: 32px;
+  background: blue;
+  color: #fff;
+  font-size: 1.3rem;
+  border: none;
+  box-shadow: 0 4px 16px rgba(37,99,235,0.15);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  cursor: pointer;
+}
+
+.adicionar-container {
+  display: flex;
+  justify-content: flex-start; /* Alinha à esquerda */
+  margin-top: 16px;
+}
+
+.input-search {
+  width: 180px;
+  height: 44px;
+  padding: 10px 16px;
+  font-size: 1em;
+  border: none;
+  border-radius: 16px;
+  background: #f5f6fa;
+  color: #1E3A5F;
+  box-shadow: 0 2px 12px rgba(30,58,95,0.07);
+  transition: box-shadow 0.3s, background 0.3s;
+  outline: none;
+  margin-right: 0;
+}
+
+.input-search:focus {
+  background: #eaf0fb;
+  box-shadow: 0 4px 18px rgba(39,60,117,0.13);
+}
+
+.input-search::placeholder {
+  color: #8ca0b3;
+  font-size: 1em;
+  opacity: 0.8;
+  letter-spacing: 0.5px;
+}
+
+.select-filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin: 0;
+}
+
+.input-search-select,
+.input-search-select-role {
+  width: 140px;
+  height: 44px;
+  padding: 8px 16px;
+  font-size: 1em;
+  border: none;
+  border-radius: 16px;
+  background: #f5f6fa;
+  color: #1E3A5F;
+  box-shadow: 0 2px 12px rgba(30,58,95,0.07);
+  transition: box-shadow 0.3s, background 0.3s, border 0.3s;
+  outline: none;
+  appearance: none;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.input-search-select:focus,
+.input-search-select-role:focus {
+  background: #eaf0fb;
+  box-shadow: 0 4px 18px rgba(39,60,117,0.13);
+  border: 1.5px solid #1E3A5F;
+}
+
+.input-search-select option,
+.input-search-select-role option {
+  background: #fff;
+  color: #1E3A5F;
+  font-size: 1em;
+}
+
+.doacoes-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(30,58,95,0.13);
+  padding: 40px 32px 32px 32px;
+  margin: 40px auto 0 auto;
+  max-width: 1400px;    /* ocupa quase toda a largura da tela */
+  min-width: 320px;
+  width: 98vw;        /* ocupa quase toda a largura da tela */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  /* overflow-x: auto;  NÃO coloque overflow aqui */
+}
+
+.adicionar-2:hover, .adicionar:focus {
+  background: linear-gradient(135deg, #1d4ed8 60%, #3b82f6 100%);
+  transform: scale(1.08);
+  box-shadow: 0 8px 24px rgba(37,99,235,0.22);
+  color: #fff;
+}
+
+.filters-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
 }

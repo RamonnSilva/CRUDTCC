@@ -40,7 +40,7 @@ th{
   box-shadow: 0 2px 12px rgba(30,58,95,0.07);
   transition: box-shadow 0.3s, background 0.3s;
   outline: none;
-  margin-right: 0; /* remove margem extra */
+  margin-right: -70px; /* remove margem extra */
 }
 
 .input-search:focus {
@@ -68,7 +68,7 @@ th{
   gap: 10px; /* espaço entre ícone e texto */
   margin: -160px 0 24px 0;
   width: auto; /* permite crescer para caber o texto */
-  margin-right:1200px;
+  margin-right:1000px;
   min-width: 64px;
   height: 45px;
   padding: 0 8px;

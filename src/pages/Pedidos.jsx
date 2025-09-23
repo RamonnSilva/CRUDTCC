@@ -7,12 +7,14 @@ import Form from 'react-bootstrap/Form';
 import { Link } from 'react-router-dom';
 import { FaPencil } from "react-icons/fa6";
 import { MdDeleteForever } from "react-icons/md";
-
+import "./styles/Pedidos.css";
 const Pedidos = () => {
   const [busca, setBusca] = useState('');
   const [pedidos, setPedidos] = useState([]);
   const [showModal, setShowModal] = useState(false); 
   const [editPedidoId, setEditPedidoId] = useState(null); 
+  const [statusPedido, setStatusPedido] = useState('');
+  const [status, setStatus] = useState('');
   const [editedPedido, setEditedPedido] = useState({
     idDoacao: '',
     tituloLivro: '',
@@ -109,19 +111,25 @@ const Pedidos = () => {
     });
   };
 
+
+   
+  const statuss = [...new Set(pedidos.map(c => c.statusPedido))];
   return (
     <>
-      <div className='clientes-container'>
-        <div className='second-container'>
-          <input 
+      <div className="pedido-card">
+        <div className="search-add-pedido">
+          <Form.Control
             type="search"
             placeholder="Pesquisar Pedido"
-            id="input-search"
             value={busca}
-            onChange={ e => setBusca(e.target.value)}
+            onChange={e => setBusca(e.target.value)}
+            className="input-search"
           />
+
+          
+          {/* Se quiser adicionar filtros, coloque aqui */}
           <Link to="/adicionar">
-            <Button variant="warning" className='adicionar'>+</Button>{''}
+            <Button variant="primary" className="adicionar-pedido">Add New Pedido</Button>
           </Link>
         </div>
 
