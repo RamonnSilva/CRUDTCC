@@ -14,7 +14,7 @@
 
 .search-add-pedido {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start; /* Alinha à esquerda */
   align-items: center;
   gap: 16px;
   margin: 40px 0 20px 0;
@@ -34,7 +34,7 @@
   box-shadow: 0 2px 12px rgba(30,58,95,0.07);
   transition: box-shadow 0.3s, background 0.3s;
   outline: none;
-  margin-right: 0;
+  margin-right: 0; /* Remove margem extra */
 }
 
 .input-search:focus {
@@ -53,19 +53,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
+  margin-right: 1200px;
+  /* Remova o margin-right grande */
   gap: 10px;
-  min-width: 64px;
-  height: 45px;
-  padding: 0 16px;
+  min-width: 140px; /* aumenta o mínimo para caber o texto */
+  height: 44px;
+  padding: 0 24px;
   border-radius: 32px;
   background: blue;
   color: #fff;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   border: none;
   box-shadow: 0 4px 16px rgba(37,99,235,0.15);
   transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
   position: relative;
   cursor: pointer;
+  white-space: nowrap; /* impede quebra de linha */
 }
 
 .adicionar-pedido:hover, .adicionar-pedido:focus {

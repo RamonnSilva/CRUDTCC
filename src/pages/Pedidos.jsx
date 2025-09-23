@@ -125,13 +125,14 @@ const Pedidos = () => {
             onChange={e => setBusca(e.target.value)}
             className="input-search"
           />
-
+          
+               </div>
           
           {/* Se quiser adicionar filtros, coloque aqui */}
           <Link to="/adicionar">
             <Button variant="primary" className="adicionar-pedido">Add New Pedido</Button>
           </Link>
-        </div>
+   
 
         <Table striped bordered hover variant='white' className="custom-table">
           <thead>

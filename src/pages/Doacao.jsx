@@ -122,7 +122,7 @@ const Doacoes = () => {
             <input
               type="search"
               placeholder="Pesquisar doacao"
-              className="input-search"
+              className="input-search-2"
               value={busca}
               onChange={e => setBusca(e.target.value)}
             />
@@ -130,7 +130,7 @@ const Doacoes = () => {
               <select
                 value={genero}
                 onChange={e => setGenero(e.target.value)}
-                className="input-search-select"
+                className="input-search-2-select"
               >
                 <option value="">Genero</option>
                 {generos.map(e => <option key={e} value={e}>{e}</option>)}
@@ -138,7 +138,7 @@ const Doacoes = () => {
               <select
                 value={autor}
                 onChange={e => setAutor(e.target.value)}
-                className="input-search-select-role"
+                className="input-search-2-select-role"
               >
                 <option value="">Autor</option>
                 {autores.map(e => <option key={e} value={e}>{e}</option>)}
