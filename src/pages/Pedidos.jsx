@@ -103,7 +103,6 @@ const Pedidos = () => {
       autorLivro: '',
       generoLivro: '',
       descricaoLivro: '',
-      imagemLivro: '',
       emailSolicitante: '',
       statusPedido: '',
       correios:'',
@@ -113,7 +112,7 @@ const Pedidos = () => {
 
 
    
-  const statuss = [...new Set(pedidos.map(c => c.statusPedido))];
+  const status_pedido = [...new Set(pedidos.map(c => c.statusPedido))];
   return (
     <>
       <div className="pedido-card">
@@ -125,14 +124,18 @@ const Pedidos = () => {
             onChange={e => setBusca(e.target.value)}
             className="input-search"
           />
+          <div className='select-filters'>
+            <select
+              value={status}
+              onChange={e => setStatus(e.target.value)}
+              className="input-search-2-select-role"
+            >
+              <option value="">Status</option>
+              {status_pedido.map(e => <option key={e} value={e}>{e}</option>)}
+            </select>
+          </div>
           
-               </div>
-          
-          {/* Se quiser adicionar filtros, coloque aqui */}
-          <Link to="/adicionar">
-            <Button variant="primary" className="adicionar-pedido">Add New Pedido</Button>
-          </Link>
-   
+        </div>
 
         <Table striped bordered hover variant='white' className="custom-table">
           <thead>
@@ -142,7 +145,6 @@ const Pedidos = () => {
               <th>AUTOR LIVRO</th>
               <th>GENERO LIVRO</th>
               <th>DESCRIÇÃO LIVRO</th>
-              <th>IMAGEM LIVRO</th>
               <th>EMAIL SOLICITANTE</th>
               <th>STATUS PEDIDO</th>
               <th>CODIGO CORREIOS</th>
@@ -153,15 +155,18 @@ const Pedidos = () => {
           <tbody className="table-group-divider">
             {pedidos
               .filter(pedido =>
-                (pedido.idDoacao || '').toLowerCase().includes(busca.toLowerCase()) ||
-                (pedido.tituloLivro || '').toLowerCase().includes(busca.toLowerCase()) ||
-                (pedido.autorLivro || '').toLowerCase().includes(busca.toLowerCase()) ||
-                (pedido.generoLivro || '').toLowerCase().includes(busca.toLowerCase()) ||
-                (pedido.descricaoLivro || '').toLowerCase().includes(busca.toLowerCase()) ||
-                (pedido.emailSolicitante || '').toLowerCase().includes(busca.toLowerCase()) ||
-                (pedido.statusPedido || '').toLowerCase().includes(busca.toLowerCase()) ||
-                (pedido.correios || '').toLowerCase().includes(busca.toLowerCase()) ||
-                (pedido.dataPedido || '').toLowerCase().includes(busca.toLowerCase())
+                (
+                  (pedido.idDoacao || '').toLowerCase().includes(busca.toLowerCase()) ||
+                  (pedido.tituloLivro || '').toLowerCase().includes(busca.toLowerCase()) ||
+                  (pedido.autorLivro || '').toLowerCase().includes(busca.toLowerCase()) ||
+                  (pedido.generoLivro || '').toLowerCase().includes(busca.toLowerCase()) ||
+                  (pedido.descricaoLivro || '').toLowerCase().includes(busca.toLowerCase()) ||
+                  (pedido.emailSolicitante || '').toLowerCase().includes(busca.toLowerCase()) ||
+                  (pedido.statusPedido || '').toLowerCase().includes(busca.toLowerCase()) ||
+                  (pedido.correios || '').toLowerCase().includes(busca.toLowerCase()) ||
+                  (pedido.dataPedido || '').toLowerCase().includes(busca.toLowerCase())
+                )
+                && (status === '' || pedido.statusPedido === status)
               )
               .map(pedido => (
                 <tr key={pedido.id}>
@@ -170,7 +175,6 @@ const Pedidos = () => {
                   <td>{pedido.autorLivro}</td>
                   <td>{pedido.generoLivro}</td>
                   <td>{pedido.descricaoLivro}</td>
-                  <td>{pedido.imagemLivro}</td>
                   <td>{pedido.emailSolicitante}</td>
                   <td>{pedido.statusPedido}</td>
                   <td>{pedido.correios}</td>

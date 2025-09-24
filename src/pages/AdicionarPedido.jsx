@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
-import './styles/AdicionarDoacao.css';
+import './styles/AdicionarPedido.css';
 import Button from './components/Button.jsx';
 const AdicionarPedido = () => {
-  const [imagem, setImagem] = useState(null);
 
   const enviarDados = async (dados) => {
     try {
@@ -13,16 +12,6 @@ const AdicionarPedido = () => {
       const novoPedido = response.data;
 
       // 2. Se tiver imagem, envia ela separadamente
-      if (imagem) {
-        const formData = new FormData();
-        formData.append('imagem', imagem);
-
-        await axios.post(`http://localhost:8080/pedido/${novaDoacao.id}/imagem`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-      }
 
       alert('Pedido enviado com sucesso!');
     } catch (error) {
@@ -35,15 +24,17 @@ const AdicionarPedido = () => {
     <div className='adicionarpedido-container'>
       <Formik
         initialValues={{
-          nome: '',
-          titulo: '',
-          genero: '',
-          autor: '',
-          descricao: '',
-          email: '',
+      idDoacao: '',
+      tituloLivro: '',
+      autorLivro: '',
+      generoLivro: '',
+      descricaoLivro: '',
+      emailSolicitante: '',
+      statusPedido: '',
+      correios:'',
         }}
         onSubmit={(values) => {
-          if (values.nome.length > 0) {
+          if (values.tituloLivro.length > 0) {
             enviarDados(values);
           } else {
             alert('Favor preencher informações!');
@@ -54,27 +45,19 @@ const AdicionarPedido = () => {
           <form onSubmit={props.handleSubmit}>
             <div>
               <input
-                type="file"
-                name="imagem"
-                accept="image/*"
-                onChange={e => setImagem(e.target.files[0])}
+                type="number"
+                onChange={props.handleChange}
+                value={props.values.idDoacao}
+                placeholder="Id Doação"
+                name="idDoacao"
               />
             </div>
             <div>
               <input
                 type="text"
                 onChange={props.handleChange}
-                value={props.values.nome}
-                placeholder="nome"
-                name="nome"
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                onChange={props.handleChange}
-                value={props.values.titulo}
-                name="titulo"
+                value={props.values.tituloLivro}
+                name="tituloLivro"
                 placeholder="título"
               />
             </div>
@@ -82,27 +65,27 @@ const AdicionarPedido = () => {
               <input
                 type="text"
                 onChange={props.handleChange}
-                value={props.values.genero}
-                name="genero"
-                placeholder="gênero"
+                value={props.values.autorLivro}
+                name="autorLivro"
+                placeholder="Autor do Livro"
               />
             </div>
             <div>
               <input
                 type="text"
                 onChange={props.handleChange}
-                value={props.values.autor}
-                name="autor"
-                placeholder="autor"
+                value={props.values.generoLivro}
+                name="generoLivro"
+                placeholder="Genero Livro"
               />
             </div>
             <div>
               <input
                 type="text"
                 onChange={props.handleChange}
-                value={props.values.descricao}
-                name="descricao"
-                placeholder="descrição"
+                value={props.values.descricaoLivro}
+                name="descricaoLivro"
+                placeholder="Descrição"
               />
             </div>
 
@@ -110,11 +93,25 @@ const AdicionarPedido = () => {
               <input
                 type="text"
                 onChange={props.handleChange}
-                value={props.values.email}
-                name="email"
-                placeholder="email"
+                value={props.values.emailSolicitante}
+                name="emailSolicitante"
+                placeholder="email do solicitante"
               />
             </div>
+               <div>
+                      <select className='select-status'
+                        name="statusPedido"
+                        value={props.values.statusPedido}
+                        onChange={props.handleChange}
+                        onBlur={props.handleBlur}
+                        required>
+                        <option value="" label="Selecione o Status" />
+                        <option value="A caminho" label="A caminho" />  
+                        <option value="Pendente" label="Pendente" />
+                        <option value="Entregue" label="Entregue" />
+                        <option value="Cancelado" label="Cancelado" />
+                        </select>
+                      </div>
       <Button/>
           </form>
         )}

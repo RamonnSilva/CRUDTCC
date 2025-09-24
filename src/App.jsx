@@ -7,6 +7,7 @@ import Doacoes from './pages/Doacao';
 import Login from './pages/Login';
 import Pedidos from './pages/Pedidos';
 import AdicionarDoacao from './pages/AdicionarDoacao';
+import AdicionarPedido from './pages/AdicionarPedido';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { Button, Offcanvas } from 'react-bootstrap'; 
@@ -32,8 +33,16 @@ function App() {
                   <Link to="/clientes"><img  className="user"src='public\icons8-usuário-60.png'></img></Link>  
                   <Link to="/doacao"><img src="public\icons8-doar-50.png"></img></Link>
                   <Link to="/pedido"><img src="public\icons8-truck-50.png"></img></Link>
+                 
                   
               </ul>
+
+      <button className="sair" onClick={() => {
+      localStorage.removeItem('token');
+      setEntrou(false);
+    }}>
+      <img src="public/icons8-sair-50.png" alt="Sair" />
+    </button>
               </nav>
          </header>
 
@@ -44,6 +53,7 @@ function App() {
            <Route path='/pedido' element={<Pedidos />} />
           <Route path='/adicionar' element={<Adicionar />} />
           <Route path='/adicionardoacao' element={<AdicionarDoacao />} />
+          <Route path='/adicionarpedido' element={<AdicionarPedido />} />
         </Routes>
       </>
     </BrowserRouter>

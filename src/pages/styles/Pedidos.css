@@ -53,9 +53,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
-  margin-right: 1200px;
-  /* Remova o margin-right grande */
+  /* Remova os margin-top e margin-right grandes */
+  margin-top: 0;
+  margin-right: 0;
   gap: 10px;
   min-width: 140px; /* aumenta o mínimo para caber o texto */
   height: 44px;
@@ -70,6 +70,7 @@
   position: relative;
   cursor: pointer;
   white-space: nowrap; /* impede quebra de linha */
+  margin-left: auto; /* Isso alinha o botão à direita no flex container */
 }
 
 .adicionar-pedido:hover, .adicionar-pedido:focus {

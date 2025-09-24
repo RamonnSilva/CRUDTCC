@@ -124,10 +124,24 @@ header nav ul li a:hover {
   height:50px;
   width:50px;
 }
-.sair{
-  height:50px;
-  width:50px;
-  margin-top:500px;
+.sair {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 36px;
+  margin-top: 540px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sair img {
+  height: 50px;
+  width: 50px;
+  transition: filter 0.2s;
+}
+.sair img:hover {
+  filter: brightness(0.8);
 }
 header nav ul a img {
   transition: background-color 0.4s, box-shadow 0.4s, padding 0.2s;
