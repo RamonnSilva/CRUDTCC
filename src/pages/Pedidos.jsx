@@ -21,11 +21,9 @@ const Pedidos = () => {
     autorLivro: '',
     generoLivro: '',
     descricaoLivro: '',
-    imagemLivro: '',
     emailSolicitante: '',
     statusPedido: '',
     correios:'',
-    dataPedido:'',
   }); 
 
   useEffect(() => {
@@ -54,16 +52,13 @@ const Pedidos = () => {
   const handleEdit = (pedido) => {
     setEditPedidoId(pedido.id);
     setEditedPedido({
-      idDoacao: pedido.idDoacao,
       tituloLivro: pedido.tituloLivro,
       autorLivro: pedido.autorLivro,
       generoLivro: pedido.generoLivro,
       descricaoLivro: pedido.descricaoLivro,
-      imagemLivro: pedido.imagemLivro,
       emailSolicitante: pedido.emailSolicitante,
       statusPedido: pedido.statusPedido,
       correios: pedido.correios,
-      dataPedido: pedido.dataPedido,
     });
     setShowModal(true);
   };
@@ -98,7 +93,6 @@ const Pedidos = () => {
     setShowModal(false);
     setEditPedidoId(null);
     setEditedPedido({
-      idDoacao: '',
       tituloLivro: '',
       autorLivro: '',
       generoLivro: '',
@@ -106,7 +100,6 @@ const Pedidos = () => {
       emailSolicitante: '',
       statusPedido: '',
       correios:'',
-      dataPedido:'',
     });
   };
 
@@ -202,105 +195,19 @@ const Pedidos = () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="formTitulo">
-              <Form.Label>Titulo</Form.Label>
-              <Form.Control
-                type="text"
-                name="tituloLivro"
-                value={editedPedido.tituloLivro}
-                onChange={handleChange}
-                placeholder="Digite o titulo"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formAutor">
-              <Form.Label>Autor</Form.Label>
-              <Form.Control
-                type="text"
-                name="autorLivro"
-                value={editedPedido.autorLivro}
-                onChange={handleChange}
-                placeholder="Digite o autor do livro"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formGenero">
-              <Form.Label>Genero</Form.Label>
-              <Form.Control
-                type="text"
-                name="generoLivro"
-                value={editedPedido.generoLivro}
-                onChange={handleChange}
-                placeholder="Digite o genero do livro"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formDescricao">
-              <Form.Label>Descricao</Form.Label>
-              <Form.Control
-                type="text"
-                name="descricaoLivro"
-                value={editedPedido.descricaoLivro}
-                onChange={handleChange}
-                placeholder="Digite a descrição do livro"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formImagem">
-              <Form.Label>Imagem</Form.Label>
-              <Form.Control
-                type="text"
-                name="imagemLivro"
-                value={editedPedido.imagemLivro}
-                onChange={handleChange}
-                placeholder="URL da imagem"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formEmail">
-              <Form.Label>Email Solicitante</Form.Label>
-              <Form.Control
-                type="email"
-                name="emailSolicitante"
-                value={editedPedido.emailSolicitante}
-                onChange={handleChange}
-                placeholder="Digite o email do solicitante"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formStatus">
-              <Form.Label>Status</Form.Label>
-              <Form.Control
-                type="text"
-                name="statusPedido"
-                value={editedPedido.statusPedido}
-                onChange={handleChange}
-                placeholder="Digite o status do pedido"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formCorreios">
-              <Form.Label>Correios</Form.Label>
-              <Form.Control
-                type="text"
-                name="correios"
-                value={editedPedido.correios}
-                onChange={handleChange}
-                placeholder="Digite o código dos correios"
-              />
-            </Form.Group>
-
-            <Form.Group controlId="formData">
-              <Form.Label>Data</Form.Label>
-              <Form.Control
-                type="text"
-                name="dataPedido"
-                value={editedPedido.dataPedido}
-                onChange={handleChange}
-                placeholder="Digite a data do pedido"
-              />
-            </Form.Group>
-          </Form>
+      {Object.keys(editedPedido).map(key => (
+        <Form.Group controlId={`form${key}`} key={key}>
+          <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1)}</Form.Label>
+          <Form.Control
+            type={key === 'dataPedido' ? 'datetime-local' : 'text'}
+            name={key}
+            value={editedPedido[key]}
+            onChange={handleChange}
+            placeholder={`Digite o ${key}`}
+          />
+        </Form.Group>
+      ))}
+    </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>

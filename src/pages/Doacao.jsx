@@ -169,14 +169,16 @@ const Doacoes = () => {
           </thead>
           <tbody className="table-group-divider">
             {doacoes
-              .filter(doacao =>
-                doacao.nome.toLowerCase().includes(busca.toLowerCase()) ||
-                doacao.titulo.toLowerCase().includes(busca.toLowerCase()) ||
-                doacao.genero.toLowerCase().includes(busca.toLowerCase()) ||
-                doacao.autor.toLowerCase().includes(busca.toLowerCase())
-                  && (genero === '' || doacao.genero === genero)
-                  && (autor === '' ||  doacao.autor === autor)
-              )
+                .filter(doacao =>
+    (
+      doacao.nome.toLowerCase().includes(busca.toLowerCase()) ||
+      doacao.titulo.toLowerCase().includes(busca.toLowerCase()) ||
+      doacao.genero.toLowerCase().includes(busca.toLowerCase()) ||
+      doacao.autor.toLowerCase().includes(busca.toLowerCase())
+    ) &&
+    (genero === '' || doacao.genero === genero) &&
+    (autor === '' || doacao.autor === autor)
+  )
               .map(doacao => (
                 <tr key={doacao.id}>
                   <td>{doacao.id}</td>
@@ -278,7 +280,7 @@ const Doacoes = () => {
               <Form.Group controlId="formEmail">
                 <Form.Label>Email</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="email"
                   name="email"
                   value={editedDoacao.email}
                   onChange={handleChange}
@@ -289,7 +291,7 @@ const Doacoes = () => {
               <Form.Group controlId="formDoadorId">
                 <Form.Label>ID do Doador</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="number"
                   name="doadorId"
                   value={editedDoacao.doador?.id || ''}
                   onChange={handleChange}

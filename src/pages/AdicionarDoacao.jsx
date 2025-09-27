@@ -41,6 +41,7 @@ const AdicionarDoacao = () => {
           autor: '',
           descricao: '',
           email: '',
+          doadorid: ''
         }}
         onSubmit={(values) => {
           if (values.nome.length > 0) {
@@ -65,7 +66,7 @@ const AdicionarDoacao = () => {
                 type="text"
                 onChange={props.handleChange}
                 value={props.values.nome}
-                placeholder="nome"
+                placeholder="NOME"
                 name="nome"
               />
             </div>
@@ -75,7 +76,7 @@ const AdicionarDoacao = () => {
                 onChange={props.handleChange}
                 value={props.values.titulo}
                 name="titulo"
-                placeholder="título"
+                placeholder="TÍTULO"
               />
             </div>
             <div>
@@ -84,7 +85,7 @@ const AdicionarDoacao = () => {
                 onChange={props.handleChange}
                 value={props.values.genero}
                 name="genero"
-                placeholder="gênero"
+                placeholder="GENÊRO"
               />
             </div>
             <div>
@@ -93,7 +94,7 @@ const AdicionarDoacao = () => {
                 onChange={props.handleChange}
                 value={props.values.autor}
                 name="autor"
-                placeholder="autor"
+                placeholder="AUTOR"
               />
             </div>
             <div>
@@ -102,17 +103,26 @@ const AdicionarDoacao = () => {
                 onChange={props.handleChange}
                 value={props.values.descricao}
                 name="descricao"
-                placeholder="descrição"
+                placeholder="DESCRIÇÃO"
               />
             </div>
 
               <div>
               <input
-                type="text"
+                type="email"
                 onChange={props.handleChange}
                 value={props.values.email}
                 name="email"
-                placeholder="email"
+                placeholder="EMAIL"
+              />
+            </div>
+                 <div>
+              <input
+                type="number"
+                onChange={props.handleChange}
+                value={props.values.doadorid}
+                name="doadorid"
+                placeholder="ID DO DOADOR"
               />
             </div>
       <Button/>

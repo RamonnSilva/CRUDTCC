@@ -74,6 +74,8 @@ const Adicionar = () => {
                             value={props.values.nome}
                             placeholder="nome"
                             name="nome"
+                            pattern="[A-Za-zÀ-ÿ\s]+"
+                            required
                         />
                         {props.errors.nome && <div id="feedback">{props.errors.nome}</div>}
                     </div>
@@ -87,6 +89,7 @@ const Adicionar = () => {
                             name="email"
                             placeholder="email"
                             maxLength={255}
+                            required
                         />
                         {props.errors.descricao && <div id="feedback">{props.errors.descricao}</div>}
                     </div>
@@ -99,30 +102,44 @@ const Adicionar = () => {
                             name="senha"
                             placeholder="senha"
                             maxLength={30}
+                            required
                         />
                         {props.errors.codigoBarras && <div id="feedback">{props.errors.codigoBarras}</div>}
                     </div>
                     <div>
                         <input
                             type="text"
-                            onChange={props.handleChange}
+                             onChange={e => {
+    let v = e.target.value.replace(/\D/g, ''); // remove tudo que não é número
+    v = v.replace(/^(\d{5})(\d{3})$/, '$1-$2'); // coloca traço depois dos 5 primeiros
+    v = v.slice(0, 9); // limita o tamanho
+    props.setFieldValue('cep', v);
+  }}
                             onBlur={props.handleBlur}
                             value={props.values.cep}
                             name="cep"
                             placeholder="cep"
                             maxLength={8}
+                            required
                         />
                         {props.errors.foto && <div id="feedback">{props.errors.foto}</div>}
                     </div>
                     <div>
                         <input
-                            type="number"
-                            onChange={props.handleChange}
+                            type="text"
+                            onChange={e => {
+    let v = e.target.value.replace(/\D/g, ''); // remove tudo que não é número
+    v = v.replace(/^(\d{2})(\d)/g, '($1) $2'); // coloca parênteses nos dois primeiros
+    v = v.replace(/(\d{5})(\d)/, '$1-$2');     // coloca traço depois dos cinco seguintes
+    v = v.slice(0, 15); // limita o tamanho
+    props.setFieldValue('telefone', v);
+  }}
                             onBlur={props.handleBlur}
                             value={props.values.telefone}
                             name="telefone"
-                            placeholder="00 00000-0000"
+                            placeholder="(00) 00000-0000"
                             maxLength={20}
+                            required
                         />
                         {props.errors.preco && <div id="feedback">{props.errors.preco}</div>}
                     </div>
@@ -135,6 +152,7 @@ const Adicionar = () => {
                             value={props.values.endereco}
                             placeholder="endereco"
                             name="endereco"
+                            required
                         />
                         {props.errors.endereco && <div id="feedback">{props.errors.endereco}</div>}
                     </div>
@@ -146,7 +164,9 @@ const Adicionar = () => {
                             value={props.values.estado}
                             name="estado"
                             placeholder="estado"
+                            pattern="[A-Za-zÀ-ÿ\s]+"
                             maxLength={2}
+                            required
                         />
                           {props.errors.estado && <div id="feedback">{props.errors.endereco}</div>}
                           <div>

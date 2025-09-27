@@ -20,11 +20,11 @@ const Clientes = () => {
   const [editedCliente, setEditedCliente] = useState({
     nome: '',
     email: '',
-    senha: '',
     cep: '',
     telefone: '',
     endereco: '',
     estado: '',
+    logradouro:'',
     funcao: '',
   }); 
 
@@ -70,11 +70,12 @@ const Clientes = () => {
     setEditedCliente({
       nome: '',
       email: '',
-      senha: '',
       cep: '',
       telefone: '',
       endereco: '',
       estado: '',
+      cidade:'',
+      logradouro:'',
       funcao: '',
     });
   };
@@ -127,11 +128,12 @@ const Clientes = () => {
               <th>ID</th>
               <th>NOME</th>
               <th>EMAIL</th>
-              <th>SENHA</th>
               <th>CEP</th>
               <th>TELEFONE</th>
               <th>ENDEREÇO</th>
               <th>ESTADO</th>
+              <th>CIDADE</th>
+              <th>NUMERO</th>
               <th>ROLE</th>
               <th>STATUS</th>
             </tr>
@@ -154,11 +156,12 @@ const Clientes = () => {
                   <td>{cliente.id}</td>
                   <td>{cliente.nome}</td>
                   <td>{cliente.email}</td>
-                  <td>{cliente.senha}</td>
                   <td>{cliente.cep}</td>
                   <td>{cliente.telefone}</td>
                   <td>{cliente.endereco}</td>
                   <td>{cliente.estado}</td>
+                  <td>{cliente.cidade}</td>
+                  <td>{cliente.logradouro}</td>
                   <td>{cliente.funcao}</td>
                   <td>
                     <Button variant="success" onClick={() => handleEdit(cliente)}>
