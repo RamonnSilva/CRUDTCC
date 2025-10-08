@@ -31,6 +31,7 @@ const Adicionar = () => {
                 email: '',
                 senha: '',
                 cep: '',
+                cpf: '',
                 telefone: '',
                 endereco: '',
                 estado: '',
@@ -45,6 +46,7 @@ const Adicionar = () => {
                             email: values.email,
                             senha: values.senha,
                             cep: values.cep,
+                            cpf: values.cpf,
                             telefone: values.telefone,
                             endereco: values.endereco,
                             estado: values.estado,
@@ -122,8 +124,34 @@ const Adicionar = () => {
                             maxLength={8}
                             required
                         />
+                      
+
+
+                              
+
+
+                              
                         {props.errors.foto && <div id="feedback">{props.errors.foto}</div>}
                     </div>
+<div>
+                    <input
+  type="text"
+  onChange={e => {
+    let v = e.target.value.replace(/\D/g, ''); // remove não-dígitos
+    v = v.replace(/(\d{3})(\d)/, '$1.$2');
+    v = v.replace(/(\d{3})(\d)/, '$1.$2');
+    v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    v = v.slice(0, 14); // limita no formato 999.999.999-99
+    props.setFieldValue('cpf', v);
+  }}
+  onBlur={props.handleBlur}
+  value={props.values.cpf}
+  name="cpf"
+  placeholder="CPF"
+  maxLength={14}
+  required
+/>
+</div>
                     <div>
                         <input
                             type="text"

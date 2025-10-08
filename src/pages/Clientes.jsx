@@ -21,6 +21,7 @@ const Clientes = () => {
     nome: '',
     email: '',
     cep: '',
+    cpf: '',
     telefone: '',
     endereco: '',
     estado: '',
@@ -71,6 +72,7 @@ const Clientes = () => {
       nome: '',
       email: '',
       cep: '',
+      cpf: '',
       telefone: '',
       endereco: '',
       estado: '',
@@ -129,6 +131,7 @@ const Clientes = () => {
               <th>NOME</th>
               <th>EMAIL</th>
               <th>CEP</th>
+              <th>CPF</th>
               <th>TELEFONE</th>
               <th>ENDEREÇO</th>
               <th>ESTADO</th>
@@ -157,6 +160,7 @@ const Clientes = () => {
                   <td>{cliente.nome}</td>
                   <td>{cliente.email}</td>
                   <td>{cliente.cep}</td>
+                  <td>{cliente.cpf}</td>
                   <td>{cliente.telefone}</td>
                   <td>{cliente.endereco}</td>
                   <td>{cliente.estado}</td>
