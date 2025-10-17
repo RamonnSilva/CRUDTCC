@@ -58,6 +58,7 @@ const Pedidos = () => {
       descricaoLivro: pedido.descricaoLivro,
       emailSolicitante: pedido.emailSolicitante,
       statusPedido: pedido.statusPedido,
+      imagemLivro: pedido.imagemLivro,
       correios: pedido.correios,
     });
     setShowModal(true);
@@ -99,6 +100,7 @@ const Pedidos = () => {
       descricaoLivro: '',
       emailSolicitante: '',
       statusPedido: '',
+      imagemLivro: null,
       correios:'',
     });
   };
