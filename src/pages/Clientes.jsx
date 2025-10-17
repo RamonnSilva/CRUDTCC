@@ -122,7 +122,7 @@ const Clientes = () => {
         </div>
         <div className='clientes-container'>
           <Link to="/Adicionar">
-            <Button variant="primary" className='adicionar'>Add New User</Button>
+            <Button variant="primary" className='adicionar'>Adicionar usuario</Button>
           </Link>
         </div>
 
