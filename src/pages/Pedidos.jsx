@@ -197,7 +197,9 @@ const Pedidos = () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            {Object.keys(editedPedido).map(key => (
+            {Object.keys(editedPedido)
+            .filter(key => key !== 'imagemLivro')
+            .map(key => (
               key === 'statusPedido' ? (
                 <Form.Group controlId={`form${key}`} key={key}>
                   <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1)}</Form.Label>

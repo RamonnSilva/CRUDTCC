@@ -151,15 +151,15 @@ const Doacoes = () => {
         <Table striped bordered hover variant='white' className="custom-table">
           <thead>
             <tr>
-              <th>id</th>
-              <th>idDoador</th>
-              <th>Imagem</th>
-              <th>Nome</th>
-              <th>Titulo</th>
-              <th>Genero</th>
-              <th>Autor</th>
-              <th>Descricao</th>
-              <th>Email</th>
+              <th>ID</th>
+              <th>ID DO DOADOR</th>
+              <th>IMAGEM</th>
+              <th>NOME</th>
+              <th>TITULO</th>
+              <th>GENÊRO</th>
+              <th>AUTOR</th>
+              <th>DESCRIÇÃO</th>
+              <th>EMAIL</th>
               <th>STATUS</th>
             </tr>
           </thead>
