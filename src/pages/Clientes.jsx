@@ -4,7 +4,7 @@ import ClienteService from './services/ClienteService';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import Total from './components/Total.jsx'
+import Total from './components/Total.jsx';
 import './styles/Clientes.css';
 import { Link } from 'react-router-dom';
 import { FaPencil } from "react-icons/fa6";
@@ -25,7 +25,8 @@ const Clientes = () => {
     telefone: '',
     endereco: '',
     estado: '',
-    logradouro:'',
+    cidade: '',
+    logradouro: '',
     funcao: '',
   }); 
 
@@ -45,7 +46,9 @@ const Clientes = () => {
 
   const handleEdit = (cliente) => {
     setEditClienteId(cliente.id);
-    setEditedCliente({ ...cliente });
+    // Remove doacoes e message se estiverem presentes
+    const { doacoes, message, ...clienteSemExtras } = cliente;
+    setEditedCliente({ ...clienteSemExtras });
     setShowModal(true);
   };
 
@@ -76,8 +79,8 @@ const Clientes = () => {
       telefone: '',
       endereco: '',
       estado: '',
-      cidade:'',
-      logradouro:'',
+      cidade: '',
+      logradouro: '',
       funcao: '',
     });
   };
@@ -115,7 +118,6 @@ const Clientes = () => {
               <option value="">Funcao</option>
               {funcoes.map(e => <option key={e} value={e}>{e}</option>)}
             </select>
-           
           </div>
         </div>
         <div className='clientes-container'>

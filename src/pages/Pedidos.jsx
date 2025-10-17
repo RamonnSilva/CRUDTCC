@@ -195,19 +195,35 @@ const Pedidos = () => {
         </Modal.Header>
         <Modal.Body>
           <Form>
-      {Object.keys(editedPedido).map(key => (
-        <Form.Group controlId={`form${key}`} key={key}>
-          <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1)}</Form.Label>
-          <Form.Control
-            type={key === 'dataPedido' ? 'datetime-local' : 'text'}
-            name={key}
-            value={editedPedido[key]}
-            onChange={handleChange}
-            placeholder={`Digite o ${key}`}
-          />
-        </Form.Group>
-      ))}
-    </Form>
+            {Object.keys(editedPedido).map(key => (
+              key === 'statusPedido' ? (
+                <Form.Group controlId={`form${key}`} key={key}>
+                  <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1)}</Form.Label>
+                  <Form.Select
+                    name={key}
+                    value={editedPedido[key]}
+                    onChange={handleChange}
+                  >
+                    <option value="">Selecione o Status</option>
+                    <option value="A caminho">Pedido a caminho</option>
+                    <option value="Cancelado">Pedido cancelado</option>
+                    <option value="Entregue">Pedido entregue</option>
+                  </Form.Select>
+                </Form.Group>
+              ) : (
+                <Form.Group controlId={`form${key}`} key={key}>
+                  <Form.Label>{key.charAt(0).toUpperCase() + key.slice(1)}</Form.Label>
+                  <Form.Control
+                    type={key === 'dataPedido' ? 'datetime-local' : 'text'}
+                    name={key}
+                    value={editedPedido[key]}
+                    onChange={handleChange}
+                    placeholder={`Digite o ${key}`}
+                  />
+                </Form.Group>
+              )
+            ))}
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleCloseModal}>

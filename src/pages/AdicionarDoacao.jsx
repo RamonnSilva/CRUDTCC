@@ -41,7 +41,8 @@ const AdicionarDoacao = () => {
           autor: '',
           descricao: '',
           email: '',
-          doadorid: ''
+          doadorid: '',
+         
         }}
         onSubmit={(values) => {
           if (values.nome.length > 0) {
@@ -116,6 +117,9 @@ const AdicionarDoacao = () => {
                 placeholder="EMAIL"
               />
             </div>
+             
+                
+
                  <div>
               <input
                 type="number"
