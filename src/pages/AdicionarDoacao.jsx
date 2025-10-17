@@ -1,29 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 import './styles/AdicionarDoacao.css';
 import Button from './components/Button.jsx';
+
 const AdicionarDoacao = () => {
-  const [imagem, setImagem] = useState(null);
 
   const enviarDados = async (dados) => {
     try {
-      // 1. Envia os dados JSON
-      const response = await axios.post('http://localhost:8080/doacao', dados);
-      const novaDoacao = response.data;
-
-      // 2. Se tiver imagem, envia ela separadamente
-      if (imagem) {
-        const formData = new FormData();
-        formData.append('imagem', imagem);
-
-        await axios.post(`http://localhost:8080/doacao/${novaDoacao.id}/imagem`, formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-      }
-
+      // Envia apenas os dados JSON, sem imagem
+      await axios.post('http://localhost:8080/doacao', dados);
       alert('Doação enviada com sucesso!');
     } catch (error) {
       console.error('Erro ao enviar doação:', error);
@@ -42,7 +28,6 @@ const AdicionarDoacao = () => {
           descricao: '',
           email: '',
           doadorid: '',
-         
         }}
         onSubmit={(values) => {
           if (values.nome.length > 0) {
@@ -54,14 +39,6 @@ const AdicionarDoacao = () => {
       >
         {props => (
           <form onSubmit={props.handleSubmit}>
-            <div>
-              <input
-                type="file"
-                name="imagem"
-                accept="image/*"
-                onChange={e => setImagem(e.target.files[0])}
-              />
-            </div>
             <div>
               <input
                 type="text"
@@ -107,8 +84,7 @@ const AdicionarDoacao = () => {
                 placeholder="DESCRIÇÃO"
               />
             </div>
-
-              <div>
+            <div>
               <input
                 type="email"
                 onChange={props.handleChange}
@@ -117,10 +93,7 @@ const AdicionarDoacao = () => {
                 placeholder="EMAIL"
               />
             </div>
-             
-                
-
-                 <div>
+            <div>
               <input
                 type="number"
                 onChange={props.handleChange}
@@ -129,7 +102,7 @@ const AdicionarDoacao = () => {
                 placeholder="ID DO DOADOR"
               />
             </div>
-      <Button/>
+            <Button />
           </form>
         )}
       </Formik>

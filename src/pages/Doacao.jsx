@@ -145,11 +145,7 @@ const Doacoes = () => {
               </select>
             </div>
           </div>
-          <div className="adicionar-container">
-            <Link to="/adicionardoacao">
-              <Button variant="primary" className='adicionar-2'>Add New Donation</Button>
-            </Link>
-          </div>
+       
         </div>
 
         <Table striped bordered hover variant='white' className="custom-table">

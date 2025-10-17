@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import axios from 'axios';
 import './styles/Adicionar.css';
-import { Link } from 'react-router-dom';
-import Alerta from './components/Alert.jsx';
 import Button from './components/Button.jsx';
 
 const Adicionar = () => {
@@ -19,9 +17,24 @@ const Adicionar = () => {
   }
 
   useEffect(() => {
-    clicou ? enviarDados() : console.log('app no ar');
+    clicou ? enviarDados() : null;
     return () => setClicou(false);
   }, [clicou]);
+
+  // Função para buscar endereço pelo CEP usando ViaCEP
+  const buscarEnderecoPorCep = async (cep, setFieldValue) => {
+    try {
+      const response = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      if (!response.data.erro) {
+        setFieldValue('endereco', response.data.logradouro || '');
+        setFieldValue('cidade', response.data.localidade || '');
+        setFieldValue('estado', response.data.uf || '');
+        // Não seta bairro, pois não existe no seu formulário
+      }
+    } catch (error) {
+      // Se o CEP for inválido, não faz nada
+    }
+  };
 
   return (
     <div className="sobre-container">
@@ -57,7 +70,6 @@ const Adicionar = () => {
                 funcao: values.funcao,
               });
               setClicou(true);
-              // actions.setSubmitting(false);
             }, 1000);
           } else {
             alert('Favor preencher informações!');
@@ -112,10 +124,15 @@ const Adicionar = () => {
               <input
                 type="text"
                 onChange={(e) => {
-                  let v = e.target.value.replace(/\D/g, ''); // remove tudo que não é número
-                  v = v.replace(/^(\d{5})(\d{3})$/, '$1-$2'); // coloca traço depois dos 5 primeiros
-                  v = v.slice(0, 9); // limita o tamanho
+                  let v = e.target.value.replace(/\D/g, '');
+                  v = v.replace(/^(\d{5})(\d{3})$/, '$1-$2');
+                  v = v.slice(0, 9);
                   props.setFieldValue('cep', v);
+
+                  // Chama ViaCEP quando o CEP estiver completo
+                  if (v.length === 9) {
+                    buscarEnderecoPorCep(v, props.setFieldValue);
+                  }
                 }}
                 onBlur={props.handleBlur}
                 value={props.values.cep}
@@ -131,11 +148,11 @@ const Adicionar = () => {
               <input
                 type="text"
                 onChange={(e) => {
-                  let v = e.target.value.replace(/\D/g, ''); // remove não-dígitos
+                  let v = e.target.value.replace(/\D/g, '');
                   v = v.replace(/(\d{3})(\d)/, '$1.$2');
                   v = v.replace(/(\d{3})(\d)/, '$1.$2');
                   v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-                  v = v.slice(0, 14); // limita no formato 999.999.999-99
+                  v = v.slice(0, 14);
                   props.setFieldValue('cpf', v);
                 }}
                 onBlur={props.handleBlur}
@@ -152,10 +169,10 @@ const Adicionar = () => {
               <input
                 type="text"
                 onChange={(e) => {
-                  let v = e.target.value.replace(/\D/g, ''); // remove tudo que não é número
-                  v = v.replace(/^(\d{2})(\d)/g, '($1) $2'); // coloca parênteses nos dois primeiros
-                  v = v.replace(/(\d{5})(\d)/, '$1-$2'); // coloca traço depois dos cinco seguintes
-                  v = v.slice(0, 15); // limita o tamanho
+                  let v = e.target.value.replace(/\D/g, '');
+                  v = v.replace(/^(\d{2})(\d)/g, '($1) $2');
+                  v = v.replace(/(\d{5})(\d)/, '$1-$2');
+                  v = v.slice(0, 15);
                   props.setFieldValue('telefone', v);
                 }}
                 onBlur={props.handleBlur}
@@ -196,7 +213,6 @@ const Adicionar = () => {
               {props.errors.estado && <div id="feedback">{props.errors.estado}</div>}
             </div>
 
-            {/* Novo input para Cidade */}
             <div>
               <input
                 type="text"
@@ -211,7 +227,6 @@ const Adicionar = () => {
               {props.errors.cidade && <div id="feedback">{props.errors.cidade}</div>}
             </div>
 
-            {/* Novo input para Logradouro */}
             <div>
               <input
                 type="text"
